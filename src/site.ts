@@ -1,6 +1,6 @@
 // Vently's own sales WhatsApp, digits only with country code (e.g. '51987654321').
 // While empty, the contact buttons fall back to email.
-const whatsapp = '';
+const whatsapp = '51993365158';
 const contactMessage = 'Hola, quiero ver Vently para mi negocio y reservar el precio fundador.';
 
 export const site = {
