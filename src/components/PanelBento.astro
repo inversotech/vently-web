@@ -3,9 +3,9 @@ import Chip from './Chip.astro';
 import ProductWindow from './ProductWindow.astro';
 
 const orders = [
-  { customer: 'Rosa Quispe', product: 'Torta de chocolate', total: '85.00', status: 'Pendiente', paid: false, action: 'Confirmar' },
-  { customer: 'Carlos Mendoza', product: 'Cheesecake de maracuyá', total: '65.00', status: 'Confirmada', paid: false, action: 'Marcar pagado' },
-  { customer: 'Ana Flores', product: 'Alfajores ×12', total: '24.00', status: 'Confirmada', paid: true, action: '' },
+  { customer: 'Rosa Quispe', product: 'Torta de chocolate · sáb. 24 oct.', total: '85.00', status: 'Pendiente', payment: 'Sin pago', paid: false, action: 'Confirmar' },
+  { customer: 'Carlos Mendoza', product: 'Cheesecake de maracuyá · mañana', total: '65.00', status: 'Confirmada', payment: 'Adelanto S/ 30.00', paid: false, action: 'Cobrar saldo' },
+  { customer: 'Ana Flores', product: 'Alfajores ×12 · hoy', total: '24.00', status: 'Confirmada', payment: 'Pagada', paid: true, action: 'Entregada' },
 ];
 
 const catalog = [
@@ -17,7 +17,7 @@ const catalog = [
 const stats = [
   { label: 'Vendido hoy', value: 'S/ 482' },
   { label: 'Por cobrar', value: 'S/ 150' },
-  { label: 'Atendió la IA sola', value: '31' },
+  { label: 'Entregas de hoy', value: '4' },
 ];
 ---
 <section id="panel">
@@ -40,7 +40,7 @@ const stats = [
       <!-- Orders -->
       <article class="reveal flex flex-col rounded-3xl border border-line bg-surface p-6 lg:col-span-4">
         <h3 class="font-semibold tracking-tight">Pedidos que se registran solos</h3>
-        <p class="mt-1 text-sm leading-6 text-muted">Cada venta cerrada llega con sus datos. Confírmala y marca el pago con un clic.</p>
+        <p class="mt-1 text-sm leading-6 text-muted">Cada venta llega con su fecha de entrega. Confírmala, registra el adelanto y cobra el saldo con un clic.</p>
         <div class="mt-6 overflow-hidden rounded-2xl border border-line" aria-hidden="true">
           <div class="grid grid-cols-[minmax(0,1fr)_auto_auto] gap-x-4 border-b border-line bg-canvas px-4 py-2 text-[11px] font-medium text-muted sm:grid-cols-[minmax(0,1fr)_auto_auto_7rem]">
             <span>Cliente</span><span class="text-end">Total</span><span>Estado</span><span class="hidden sm:block">Acciones</span>
@@ -54,7 +54,7 @@ const stats = [
               <span class="text-end text-[13px] font-semibold tabular-nums">S/&nbsp;{o.total}</span>
               <span class="flex flex-col items-start gap-1">
                 <Chip tone={o.status === 'Pendiente' ? 'attention' : 'success'}>{o.status}</Chip>
-                <Chip tone={o.paid ? 'success' : 'neutral'}>{o.paid ? 'Pagada' : 'Sin pago'}</Chip>
+                <Chip tone={o.paid ? 'success' : o.payment === 'Sin pago' ? 'neutral' : 'info'}>{o.payment}</Chip>
               </span>
               <span class="hidden sm:block">
                 {o.action && <span class="block rounded-lg border border-line px-2.5 py-1.5 text-center text-[12px] font-medium">{o.action}</span>}
