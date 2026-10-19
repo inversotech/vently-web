@@ -24,73 +24,54 @@ const businesses: Business[] = [
     name: 'Dulce Trigo',
     opening: {
       q: 'Hola, ¿cuánto cuesta la torta de chocolate para 15 personas?',
-      a: '¡Hola! La torta de chocolate para 15 personas cuesta S/ 85. ¿Para qué día la necesitas?',
+      a: '¡Hola! La torta de chocolate para 15 personas cuesta S/ 85. ¿Para qué día la necesitas?',
     },
     questions: [
       {
-        q: '¿Pueden escribir un mensaje en la torta?',
-        reply: { kind: 'handoff', text: 'Buena pregunta. Eso lo confirma el equipo de la tienda; ya les avisé y te escriben en unos minutos.' },
+        q: '¿Pueden escribir “Feliz cumple, mamá”?',
+        reply: { kind: 'handoff', text: 'Eso lo confirma la pastelería, así que no quiero adivinar. Ya les avisé y te escriben en unos minutos.' },
       },
       {
-        q: 'Quiero pedirla para el sábado',
-        reply: { kind: 'order', text: '¡Listo! Registré tu pedido: 1 torta de chocolate (15 personas) para el sábado.', product: 'Torta de chocolate (15 personas)', total: '85.00' },
+        q: 'La quiero para el sábado',
+        reply: { kind: 'order', text: '¡Listo! Registré tu pedido: 1 torta de chocolate (15 personas) para el sábado. Te paso los datos para el Yape.', product: 'Torta de chocolate (15 personas)', total: '85.00' },
       },
     ],
   },
   {
-    id: 'ropa',
-    label: 'Ropa',
-    name: 'Moda Kiara',
+    id: 'floreria',
+    label: 'Florería',
+    name: 'Flor de Lima',
     opening: {
-      q: 'Hola, ¿cuánto está el polo oversize?',
-      a: '¡Hola! El polo oversize cuesta S/ 45 y viene en tallas S, M y L, en negro, blanco o beige. ¿Cuál te gustaría?',
+      q: 'Hola, ¿cuánto está el ramo de 12 rosas rojas?',
+      a: '¡Hola! El ramo de 12 rosas rojas cuesta S/ 120 e incluye tarjeta con dedicatoria. ¿Para qué día y a qué distrito lo enviamos?',
     },
     questions: [
       {
-        q: '¿Hacen envíos a provincia?',
-        reply: { kind: 'handoff', text: 'Eso no lo tengo en mi información, así que prefiero no adivinar. Ya avisé a la tienda y te responden en breve.' },
+        q: '¿Llegan hoy a Chorrillos?',
+        reply: { kind: 'handoff', text: 'Las entregas del mismo día las confirma la florería según la hora. Ya les avisé para que te respondan ahora.' },
       },
       {
-        q: 'Quiero el negro en talla M',
-        reply: { kind: 'order', text: '¡Perfecto! Registré tu pedido: 1 polo oversize negro, talla M.', product: 'Polo oversize negro · M', total: '45.00' },
+        q: 'Para el viernes en Miraflores',
+        reply: { kind: 'order', text: '¡Perfecto! Registré tu pedido: ramo de 12 rosas rojas para el viernes en Miraflores. ¿Qué dedicatoria va en la tarjeta?', product: 'Ramo de 12 rosas rojas', total: '120.00' },
       },
     ],
   },
   {
-    id: 'ferreteria',
-    label: 'Ferretería',
-    name: 'Ferretería El Maestro',
+    id: 'regalos',
+    label: 'Desayunos sorpresa',
+    name: 'Buenos Días Box',
     opening: {
-      q: 'Buenas, ¿a cuánto la bolsa de cemento?',
-      a: 'Buenas. La bolsa de cemento de 42.5 kg cuesta S/ 32. ¿Cuántas bolsas necesitas?',
+      q: 'Hola, ¿cuánto cuesta el desayuno sorpresa clásico?',
+      a: '¡Hola! El desayuno clásico cuesta S/ 95: jugo, sándwich, fruta, café y un globo. ¿Para qué día lo necesitas?',
     },
     questions: [
       {
-        q: '¿Me lo pueden llevar hoy mismo?',
-        reply: { kind: 'handoff', text: 'Los envíos del día los coordina el equipo. Ya les avisé para que te confirmen la hora.' },
+        q: '¿Pueden agregar una botella de vino?',
+        reply: { kind: 'handoff', text: 'Eso no está en el catálogo, así que prefiero no inventar un precio. Ya le avisé a la tienda para que te cotice.' },
       },
       {
-        q: 'Necesito 10 bolsas',
-        reply: { kind: 'order', text: 'Listo, registré tu pedido: 10 bolsas de cemento de 42.5 kg.', product: 'Cemento 42.5 kg × 10', total: '320.00' },
-      },
-    ],
-  },
-  {
-    id: 'servicios',
-    label: 'Servicios',
-    name: 'Técnico Express',
-    opening: {
-      q: 'Hola, ¿cuánto cuesta el mantenimiento de una laptop?',
-      a: '¡Hola! El mantenimiento preventivo de laptop cuesta S/ 60. ¿Qué día te acomoda traerla?',
-    },
-    questions: [
-      {
-        q: '¿Y cuánto por cambiar la pantalla?',
-        reply: { kind: 'handoff', text: 'El cambio de pantalla se cotiza según el modelo. Le aviso al técnico para que te pase el precio exacto.' },
-      },
-      {
-        q: 'La llevo el lunes',
-        reply: { kind: 'order', text: '¡Agendado! Registré tu mantenimiento preventivo para el lunes.', product: 'Mantenimiento preventivo de laptop', total: '60.00' },
+        q: 'Lo quiero para el domingo',
+        reply: { kind: 'order', text: '¡Listo! Registré tu pedido: 1 desayuno sorpresa clásico para el domingo. ¿A qué dirección lo llevamos?', product: 'Desayuno sorpresa clásico', total: '95.00' },
       },
     ],
   },
