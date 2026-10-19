@@ -109,13 +109,13 @@ const jsonLd = [
       class="pointer-events-none absolute inset-0 -z-10 [background-image:radial-gradient(var(--color-line)_1px,transparent_1px)] [background-size:22px_22px] [mask-image:radial-gradient(ellipse_at_top,black_30%,transparent_75%)]"
       aria-hidden="true"
     ></div>
-    <div class="container-page grid items-center gap-16 pt-16 pb-24 sm:pt-24 lg:grid-cols-[1.1fr_1fr] lg:pt-28 lg:pb-32">
+    <div class="container-page grid items-center gap-16 pt-16 pb-24 sm:pt-24 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] lg:pt-28 lg:pb-32">
       <div>
         <p class="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-3 py-1 text-xs text-muted">
           <span class="size-1.5 rounded-full bg-accent" aria-hidden="true"></span>
           Acceso anticipado · WhatsApp Business oficial
         </p>
-        <h1 class="mt-6 text-[2.6rem] leading-[1.05] font-semibold tracking-[-0.035em] text-balance sm:text-6xl">
+        <h1 class="mt-6 text-[2.6rem] leading-[1.1] font-semibold tracking-tight text-balance sm:text-6xl">
           Tu vendedor con IA en WhatsApp.
           <span class="block text-muted">No inventa precios. Sabe cuándo pedirte ayuda.</span>
         </h1>
@@ -143,8 +143,8 @@ const jsonLd = [
         <p class="mt-2 text-sm text-muted">Responde de día, de noche y los domingos, en segundos.</p>
       </div>
       <div>
-        <p class="text-3xl font-semibold tracking-tight">0 precios inventados</p>
-        <p class="mt-2 text-sm text-muted">Solo ofrece lo que está en tu catálogo, tal como lo escribiste.</p>
+        <p class="text-3xl font-semibold tracking-tight">Solo tus precios</p>
+        <p class="mt-2 text-sm text-muted">Cotiza con los precios de tu catálogo, tal como los escribiste.</p>
       </div>
       <div>
         <p class="text-3xl font-semibold tracking-tight">1 bandeja</p>
@@ -154,7 +154,7 @@ const jsonLd = [
   </section>
 
   <!-- How it works -->
-  <section id="como-funciona" class="scroll-mt-20">
+  <section id="como-funciona">
     <div class="container-page py-24 sm:py-32">
       <div class="max-w-2xl">
         <p class="eyebrow">Cómo funciona</p>
@@ -175,7 +175,7 @@ const jsonLd = [
   </section>
 
   <!-- Features -->
-  <section id="funciones" class="scroll-mt-20 bg-surface border-y border-line">
+  <section id="funciones" class="bg-surface border-y border-line">
     <div class="container-page py-24 sm:py-32">
       <div class="max-w-2xl">
         <p class="eyebrow">Funciones</p>
@@ -222,9 +222,9 @@ const jsonLd = [
         <div class="rounded-3xl border border-ink bg-ink p-8 text-canvas">
           <h3 class="font-semibold">Vently</h3>
           <ul class="mt-6 space-y-4 text-[15px]">
-            <li class="flex gap-3"><span class="text-accent" aria-hidden="true">✓</span>Describes tu negocio una vez y listo.</li>
-            <li class="flex gap-3"><span class="text-accent" aria-hidden="true">✓</span>Entiende lo que el cliente escribe, como lo escriba.</li>
-            <li class="flex gap-3"><span class="text-accent" aria-hidden="true">✓</span>Actualizas tu catálogo y la IA lo usa al momento.</li>
+            <li class="flex gap-3"><span class="text-accent-on-ink" aria-hidden="true">✓</span>Describes tu negocio una vez y listo.</li>
+            <li class="flex gap-3"><span class="text-accent-on-ink" aria-hidden="true">✓</span>Entiende lo que el cliente escribe, como lo escriba.</li>
+            <li class="flex gap-3"><span class="text-accent-on-ink" aria-hidden="true">✓</span>Actualizas tu catálogo y la IA lo usa al momento.</li>
           </ul>
         </div>
       </div>
@@ -232,7 +232,7 @@ const jsonLd = [
   </section>
 
   <!-- FAQ -->
-  <section id="preguntas" class="scroll-mt-20 border-t border-line">
+  <section id="preguntas" class="border-t border-line">
     <div class="container-page grid gap-12 py-24 sm:py-32 lg:grid-cols-[1fr_1.6fr]">
       <div>
         <p class="eyebrow">Preguntas frecuentes</p>
@@ -247,9 +247,9 @@ const jsonLd = [
           <details class="group py-5">
             <summary class="flex cursor-pointer list-none items-center justify-between gap-6 font-medium [&::-webkit-details-marker]:hidden">
               {f.q}
-              <span class="grid size-6 shrink-0 place-items-center rounded-full border border-line text-muted transition-transform group-open:rotate-45" aria-hidden="true">+</span>
+              <span class="grid size-6 shrink-0 place-items-center rounded-full border border-line text-muted group-open:rotate-45 motion-safe:transition-transform" aria-hidden="true">+</span>
             </summary>
-            <p class="mt-3 pr-10 text-[15px] leading-7 text-muted">{f.a}</p>
+            <p class="mt-3 pe-10 text-[15px] leading-7 text-muted">{f.a}</p>
           </details>
         ))}
       </div>
@@ -266,7 +266,7 @@ const jsonLd = [
       <p class="relative mx-auto mt-4 max-w-lg text-canvas/70">
         Crea tu cuenta, carga tu catálogo y conecta tu WhatsApp. Tus clientes no vuelven a esperar.
       </p>
-      <a href={site.registerUrl} class="btn relative mt-8 bg-canvas px-6 py-3 text-[15px] text-ink hover:bg-accent hover:text-white">
+      <a href={site.registerUrl} class="btn relative mt-8 bg-canvas px-6 py-3 text-[15px] text-ink hover:bg-accent-strong hover:text-on-accent">
         Crear cuenta gratis
       </a>
     </div>
