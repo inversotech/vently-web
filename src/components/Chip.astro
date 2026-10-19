@@ -1,0 +1,12 @@
+---
+type Tone = 'neutral' | 'info' | 'attention' | 'success';
+interface Props { tone?: Tone; class?: string; style?: string }
+const { tone = 'neutral', class: className = '', style } = Astro.props;
+const tones: Record<Tone, string> = {
+  neutral: 'bg-bubble-in text-muted',
+  info: 'bg-info-soft text-info-ink',
+  attention: 'bg-attention-soft text-attention-ink',
+  success: 'bg-success-soft text-success-ink',
+};
+---
+<span class:list={['chip', tones[tone], className]} style={style}><slot /></span>

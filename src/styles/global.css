@@ -17,6 +17,12 @@
   --color-on-accent: oklch(1 0 0);
   --color-accent-on-ink: oklch(0.62 0.17 152);
   --color-attention: oklch(0.77 0.16 70);
+  --color-attention-soft: oklch(0.96 0.05 85);
+  --color-attention-ink: oklch(0.5 0.12 60);
+  --color-info-soft: oklch(0.95 0.03 250);
+  --color-info-ink: oklch(0.5 0.14 255);
+  --color-success-soft: oklch(0.95 0.05 152);
+  --color-success-ink: oklch(0.48 0.13 152);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -33,6 +39,12 @@
     --color-bubble-out: oklch(0.33 0.07 152);
     --color-on-accent: oklch(0.17 0.012 160);
     --color-accent-on-ink: oklch(0.52 0.15 152);
+    --color-attention-soft: oklch(0.3 0.06 70);
+    --color-attention-ink: oklch(0.86 0.12 80);
+    --color-info-soft: oklch(0.3 0.06 255);
+    --color-info-ink: oklch(0.86 0.08 255);
+    --color-success-soft: oklch(0.3 0.06 152);
+    --color-success-ink: oklch(0.86 0.13 152);
   }
 }
 
@@ -102,5 +114,46 @@
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+}
+
+/* Status chips used by the product mockups */
+@utility chip {
+  @apply inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[11px] font-medium whitespace-nowrap;
+}
+
+/*
+ * One-shot entrance sequence for the hero mockup. Each child sets --d (delay).
+ * The resting state is the final state, so with no animation support nothing is hidden.
+ * The whole sequence finishes in under 5s (WCAG 2.2.2).
+ */
+@keyframes rise {
+  from { opacity: 0; filter: blur(4px); translate: 0 12px; }
+}
+@keyframes fade-in {
+  from { opacity: 0; }
+}
+@keyframes fade-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .seq { animation: rise 300ms ease-out both; animation-delay: var(--d, 0ms); }
+  .seq-out { animation: fade-out 200ms ease-out both; animation-delay: var(--d, 0ms); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .seq { animation: fade-in 300ms ease-out both; animation-delay: var(--d, 0ms); }
+  .seq-out { animation: fade-out 200ms ease-out both; animation-delay: var(--d, 0ms); }
+}
+.seq-out { opacity: 0; }
+
+/* Scroll-linked reveal for sections below the fold (progressive enhancement). */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal {
+      animation: rise linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 60%;
+    }
   }
 }
