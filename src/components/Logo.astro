@@ -3,9 +3,10 @@ interface Props { class?: string }
 const { class: className = '' } = Astro.props;
 ---
 <span class:list={['inline-flex items-center gap-2 font-semibold tracking-tight', className]}>
-  <svg viewBox="0 0 32 32" class="size-7" aria-hidden="true">
-    <rect width="32" height="32" rx="9" class="fill-ink" />
-    <path d="M9 10.5l7 11 7-11" fill="none" class="stroke-accent" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" />
-  </svg>
-  <span class="text-lg">vently</span>
+  {/* Same marks as app.vently.lat: green tile on light, black tile on dark. */}
+  <picture>
+    <source srcset="/brand/logo-negro.webp" media="(prefers-color-scheme: dark)" />
+    <img src="/brand/logo-verde.webp" alt="" width="64" height="64" decoding="async" class="size-7" />
+  </picture>
+  <span class="text-lg">Vently</span>
 </span>
