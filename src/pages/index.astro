@@ -1,0 +1,274 @@
+---
+import Base from '../layouts/Base.astro';
+import ChatDemo from '../components/ChatDemo.astro';
+import { site } from '../site';
+
+const steps = [
+  {
+    title: 'Crea tu cuenta y carga tu catálogo',
+    text: 'Describe tu negocio y agrega tus productos o servicios con sus precios. Si algo es “a cotizar”, también se puede.',
+  },
+  {
+    title: 'Conecta tu WhatsApp',
+    text: 'Vincula el número de tu negocio desde el panel con el registro oficial de Meta. Sin instalar nada.',
+  },
+  {
+    title: 'Vently atiende y vende',
+    text: 'Responde al instante, resuelve dudas, toma los datos del pedido y lo deja listo en tu panel.',
+  },
+];
+
+const features = [
+  {
+    title: 'Vende conversando',
+    text: 'Sin flujos ni menús de botones que armar. Entiende lo que el cliente escribe y responde como lo haría tu mejor vendedor.',
+    icon: 'M4 6h16M4 12h10M4 18h7',
+  },
+  {
+    title: 'Nunca inventa precios',
+    text: 'Solo usa los productos, precios y datos que tú cargaste. Si no está en tu catálogo, no lo ofrece.',
+    icon: 'M12 3l7 4v5c0 4.5-3 8-7 9-4-1-7-4.5-7-9V7l7-4z M9 12l2 2 4-4',
+  },
+  {
+    title: 'Sabe cuándo pedir ayuda',
+    text: 'Si una consulta no tiene respuesta en tu información, no improvisa: avisa a tu equipo para que tome la conversación.',
+    icon: 'M12 8v4 M12 16h.01 M10.3 3.9L2.4 17.5A2 2 0 004.1 20.5h15.8a2 2 0 001.7-3L13.7 3.9a2 2 0 00-3.4 0z',
+  },
+  {
+    title: 'Pedidos ordenados',
+    text: 'Cada venta cerrada llega a tu panel con nombre, producto, cantidad y dirección. Nada se pierde en el chat.',
+    icon: 'M6 2h9l5 5v15H6z M14 2v6h6 M9 13h8 M9 17h5',
+  },
+  {
+    title: 'Confirmado y pagado',
+    text: 'Marca el pedido como confirmado o pagado (Yape, Plin o transferencia) y tu cliente recibe el aviso por WhatsApp.',
+    icon: 'M3 7h18v12H3z M3 11h18 M7 15h3',
+  },
+  {
+    title: 'Tú tienes el control',
+    text: 'Lee todas las conversaciones en una sola bandeja y responde tú mismo cuando quieras. La IA se hace a un lado.',
+    icon: 'M4 5h16v11H8l-4 4z',
+  },
+];
+
+const faqs = [
+  {
+    q: '¿Necesito saber programar o armar un chatbot?',
+    a: 'No. Vently no es un constructor de flujos. Solo describes tu negocio y cargas tu catálogo; la inteligencia artificial se encarga de conversar.',
+  },
+  {
+    q: '¿Usa la API oficial de WhatsApp?',
+    a: 'Sí. Vently funciona sobre WhatsApp Business Platform, la plataforma oficial de Meta para empresas. Conectas tu número mediante el registro integrado de Meta, desde el panel.',
+  },
+  {
+    q: '¿Qué pasa si un cliente pregunta algo que la IA no sabe?',
+    a: 'No inventa la respuesta. Le dice al cliente que una persona del equipo lo atenderá y te avisa en el panel para que continúes la conversación.',
+  },
+  {
+    q: '¿Puedo responder yo en lugar de la IA?',
+    a: 'Sí, en cualquier momento. Desde la bandeja de conversaciones puedes escribirle al cliente directamente y cerrar la conversación cuando termines.',
+  },
+  {
+    q: '¿Qué pasa con los datos de mis clientes?',
+    a: 'Se usan solo para atender a tus clientes en tu nombre. No los vendemos ni los compartimos con fines publicitarios. Los detalles están en nuestra política de privacidad.',
+  },
+  {
+    q: '¿Cuánto cuesta?',
+    a: 'Estamos en acceso anticipado: puedes crear tu cuenta sin costo. Anunciaremos los planes con anticipación, antes de realizar cualquier cobro.',
+  },
+];
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: site.name,
+    url: site.url,
+    applicationCategory: 'BusinessApplication',
+    operatingSystem: 'Web',
+    description: site.description,
+    inLanguage: 'es',
+    publisher: { '@type': 'Organization', name: site.company.legalName },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((f) => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
+  },
+];
+---
+
+<Base jsonLd={jsonLd}>
+  <!-- Hero -->
+  <section class="relative overflow-hidden">
+    <div
+      class="pointer-events-none absolute inset-0 -z-10 [background-image:radial-gradient(var(--color-line)_1px,transparent_1px)] [background-size:22px_22px] [mask-image:radial-gradient(ellipse_at_top,black_30%,transparent_75%)]"
+      aria-hidden="true"
+    ></div>
+    <div class="container-page grid items-center gap-16 pt-16 pb-24 sm:pt-24 lg:grid-cols-[1.1fr_1fr] lg:pt-28 lg:pb-32">
+      <div>
+        <p class="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-3 py-1 text-xs text-muted">
+          <span class="size-1.5 rounded-full bg-accent" aria-hidden="true"></span>
+          Acceso anticipado · WhatsApp Business oficial
+        </p>
+        <h1 class="mt-6 text-[2.6rem] leading-[1.05] font-semibold tracking-[-0.035em] text-balance sm:text-6xl">
+          Tu vendedor con IA en WhatsApp.
+          <span class="block text-muted">No inventa precios. Sabe cuándo pedirte ayuda.</span>
+        </h1>
+        <p class="mt-6 max-w-xl text-lg leading-8 text-muted text-pretty">
+          Vently atiende a tus clientes al instante, responde con la información real de tu negocio y deja cada
+          pedido listo en tu panel. Sin armar bots. Sin perder ventas mientras no miras el celular.
+        </p>
+        <div class="mt-9 flex flex-wrap items-center gap-3">
+          <a href={site.registerUrl} class="btn-primary px-6 py-3 text-[15px]">
+            Crear cuenta gratis
+            <svg viewBox="0 0 20 20" class="size-4" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 10h12m-5-5 5 5-5 5" stroke-linecap="round" stroke-linejoin="round" /></svg>
+          </a>
+          <a href="#como-funciona" class="btn-ghost px-6 py-3 text-[15px]">Ver cómo funciona</a>
+        </div>
+      </div>
+      <ChatDemo />
+    </div>
+  </section>
+
+  <!-- Statement -->
+  <section class="border-y border-line bg-surface">
+    <div class="container-page grid gap-10 py-16 sm:grid-cols-3">
+      <div>
+        <p class="text-3xl font-semibold tracking-tight">24/7</p>
+        <p class="mt-2 text-sm text-muted">Responde de día, de noche y los domingos, en segundos.</p>
+      </div>
+      <div>
+        <p class="text-3xl font-semibold tracking-tight">0 precios inventados</p>
+        <p class="mt-2 text-sm text-muted">Solo ofrece lo que está en tu catálogo, tal como lo escribiste.</p>
+      </div>
+      <div>
+        <p class="text-3xl font-semibold tracking-tight">1 bandeja</p>
+        <p class="mt-2 text-sm text-muted">Conversaciones y pedidos en un solo lugar, para ti y tu equipo.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section id="como-funciona" class="scroll-mt-20">
+    <div class="container-page py-24 sm:py-32">
+      <div class="max-w-2xl">
+        <p class="eyebrow">Cómo funciona</p>
+        <h2 class="mt-3 text-3xl font-semibold tracking-tight text-balance sm:text-4xl">
+          Listo para vender en una tarde.
+        </h2>
+      </div>
+      <ol class="mt-14 grid gap-px overflow-hidden rounded-3xl border border-line bg-line md:grid-cols-3">
+        {steps.map((s, i) => (
+          <li class="bg-canvas p-8">
+            <span class="font-mono text-sm text-accent-strong">0{i + 1}</span>
+            <h3 class="mt-6 text-lg font-semibold tracking-tight">{s.title}</h3>
+            <p class="mt-2 text-[15px] leading-7 text-muted">{s.text}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section id="funciones" class="scroll-mt-20 bg-surface border-y border-line">
+    <div class="container-page py-24 sm:py-32">
+      <div class="max-w-2xl">
+        <p class="eyebrow">Funciones</p>
+        <h2 class="mt-3 text-3xl font-semibold tracking-tight text-balance sm:text-4xl">
+          Un vendedor en quien puedes confiar tu negocio.
+        </h2>
+        <p class="mt-4 text-lg leading-8 text-muted">
+          La mayoría de chatbots siguen un guion o, peor, improvisan. Vently conversa con naturalidad y respeta
+          tus reglas.
+        </p>
+      </div>
+      <ul class="mt-14 grid gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+        {features.map((f) => (
+          <li>
+            <span class="grid size-10 place-items-center rounded-xl bg-accent-soft text-accent-strong">
+              <svg viewBox="0 0 24 24" class="size-5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d={f.icon} /></svg>
+            </span>
+            <h3 class="mt-5 font-semibold tracking-tight">{f.title}</h3>
+            <p class="mt-2 text-[15px] leading-7 text-muted">{f.text}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- Comparison -->
+  <section>
+    <div class="container-page py-24 sm:py-32">
+      <div class="max-w-2xl">
+        <p class="eyebrow">La diferencia</p>
+        <h2 class="mt-3 text-3xl font-semibold tracking-tight text-balance sm:text-4xl">
+          No programes un bot. Suma un vendedor.
+        </h2>
+      </div>
+      <div class="mt-14 grid gap-6 md:grid-cols-2">
+        <div class="rounded-3xl border border-line p-8">
+          <h3 class="font-semibold text-muted">Chatbot de flujos</h3>
+          <ul class="mt-6 space-y-4 text-[15px] text-muted">
+            <li class="flex gap-3"><span aria-hidden="true">—</span>Tienes que diseñar cada pregunta y cada botón.</li>
+            <li class="flex gap-3"><span aria-hidden="true">—</span>Si el cliente escribe algo distinto, se pierde.</li>
+            <li class="flex gap-3"><span aria-hidden="true">—</span>Cada producto nuevo es un flujo nuevo que mantener.</li>
+          </ul>
+        </div>
+        <div class="rounded-3xl border border-ink bg-ink p-8 text-canvas">
+          <h3 class="font-semibold">Vently</h3>
+          <ul class="mt-6 space-y-4 text-[15px]">
+            <li class="flex gap-3"><span class="text-accent" aria-hidden="true">✓</span>Describes tu negocio una vez y listo.</li>
+            <li class="flex gap-3"><span class="text-accent" aria-hidden="true">✓</span>Entiende lo que el cliente escribe, como lo escriba.</li>
+            <li class="flex gap-3"><span class="text-accent" aria-hidden="true">✓</span>Actualizas tu catálogo y la IA lo usa al momento.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="preguntas" class="scroll-mt-20 border-t border-line">
+    <div class="container-page grid gap-12 py-24 sm:py-32 lg:grid-cols-[1fr_1.6fr]">
+      <div>
+        <p class="eyebrow">Preguntas frecuentes</p>
+        <h2 class="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">Lo que nos suelen preguntar.</h2>
+        <p class="mt-4 text-muted">
+          ¿Otra duda? Escríbenos a{' '}
+          <a class="text-ink underline decoration-line underline-offset-4 hover:decoration-accent" href={`mailto:${site.company.email}`}>{site.company.email}</a>.
+        </p>
+      </div>
+      <div class="divide-y divide-line border-y border-line">
+        {faqs.map((f) => (
+          <details class="group py-5">
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-6 font-medium [&::-webkit-details-marker]:hidden">
+              {f.q}
+              <span class="grid size-6 shrink-0 place-items-center rounded-full border border-line text-muted transition-transform group-open:rotate-45" aria-hidden="true">+</span>
+            </summary>
+            <p class="mt-3 pr-10 text-[15px] leading-7 text-muted">{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="container-page pb-24">
+    <div class="relative overflow-hidden rounded-[2rem] bg-ink px-6 py-16 text-center text-canvas sm:px-16 sm:py-20">
+      <div class="absolute -top-24 left-1/2 -z-0 size-96 -translate-x-1/2 rounded-full bg-accent/30 blur-3xl" aria-hidden="true"></div>
+      <h2 class="relative text-3xl font-semibold tracking-tight text-balance sm:text-4xl">
+        Deja que Vently atienda el próximo mensaje.
+      </h2>
+      <p class="relative mx-auto mt-4 max-w-lg text-canvas/70">
+        Crea tu cuenta, carga tu catálogo y conecta tu WhatsApp. Tus clientes no vuelven a esperar.
+      </p>
+      <a href={site.registerUrl} class="btn relative mt-8 bg-canvas px-6 py-3 text-[15px] text-ink hover:bg-accent hover:text-white">
+        Crear cuenta gratis
+      </a>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,102 @@
+---
+import Legal from '../layouts/Legal.astro';
+import { site } from '../site';
+const c = site.company;
+---
+<Legal title="Política de privacidad" description="Cómo Vently recopila, usa, protege y elimina los datos personales de los negocios que usan la plataforma y de sus clientes.">
+  <p>
+    Esta política explica cómo <strong>{c.legalName}</strong> (RUC {c.ruc}), con domicilio en {c.country}
+    (“Vently”, “nosotros”), trata los datos personales cuando usas el sitio <a href={site.url}>vently.lat</a>
+    y la plataforma <a href={site.appUrl}>app.vently.lat</a> (el “Servicio”). Tratamos los datos conforme a la
+    Ley N.º 29733, Ley de Protección de Datos Personales del Perú, y su reglamento.
+  </p>
+
+  <h2>1. Quién es responsable de cada dato</h2>
+  <p>En el Servicio intervienen dos tipos de personas:</p>
+  <ul>
+    <li><strong>Negocios usuarios</strong>: las empresas y personas que crean una cuenta en Vently. Respecto de sus datos de cuenta, Vently es el responsable del tratamiento.</li>
+    <li><strong>Clientes finales</strong>: las personas que escriben a un negocio por WhatsApp u otro canal conectado. Respecto de esos datos, el negocio es el responsable y Vently actúa como encargado del tratamiento, procesándolos solo para prestar el Servicio a ese negocio y según sus instrucciones.</li>
+  </ul>
+
+  <h2>2. Qué datos recopilamos</h2>
+  <h3>De los negocios usuarios</h3>
+  <ul>
+    <li>Nombre, correo electrónico y contraseña (almacenada cifrada) de las personas que usan la cuenta.</li>
+    <li>Nombre y descripción del negocio, catálogo de productos o servicios y precios.</li>
+    <li>Datos técnicos necesarios para conectar sus canales de mensajería, como identificadores de la cuenta de WhatsApp Business y del número de teléfono, y tokens de acceso otorgados por Meta.</li>
+  </ul>
+  <h3>De los clientes finales</h3>
+  <ul>
+    <li>Número de teléfono o identificador del canal y el nombre de perfil que muestra la plataforma de mensajería.</li>
+    <li>El contenido de los mensajes intercambiados con el negocio.</li>
+    <li>Los datos que el cliente comparte para hacer un pedido, como su nombre, el producto, la cantidad y la dirección de entrega.</li>
+  </ul>
+  <h3>Del sitio web</h3>
+  <p>El sitio vently.lat no usa cookies de seguimiento ni herramientas de publicidad.</p>
+
+  <h2>3. Para qué usamos los datos</h2>
+  <ul>
+    <li>Recibir los mensajes que los clientes envían al negocio y generar respuestas automáticas con inteligencia artificial basadas en la información que el negocio cargó.</li>
+    <li>Registrar pedidos y mostrarlos al negocio en su panel, junto con el historial de conversaciones.</li>
+    <li>Enviar mensajes al cliente en nombre del negocio, por ejemplo para confirmar un pedido o un pago.</li>
+    <li>Notificar al negocio sobre nuevos pedidos y operar, asegurar y mejorar el Servicio.</li>
+  </ul>
+  <p>
+    <strong>No vendemos datos personales</strong>, no los usamos para publicidad y no usamos los datos recibidos
+    de la plataforma de Meta para ningún fin distinto de prestar el Servicio al negocio que los conectó.
+  </p>
+
+  <h2>4. Con quién los compartimos</h2>
+  <p>Solo compartimos datos con proveedores que necesitamos para operar el Servicio:</p>
+  <ul>
+    <li><strong>Meta Platforms, Inc.</strong> (WhatsApp Business Platform): para recibir y enviar mensajes.</li>
+    <li><strong>OpenAI</strong>: el contenido de la conversación y la información del negocio se envían a su API para generar cada respuesta. Según sus condiciones para clientes de la API, esos datos no se usan para entrenar sus modelos.</li>
+    <li><strong>DigitalOcean</strong>: alojamiento de los servidores y la base de datos.</li>
+    <li><strong>Google</strong> (Gmail): envío de notificaciones por correo electrónico al negocio.</li>
+  </ul>
+  <p>
+    Algunos de estos proveedores se encuentran fuera del Perú, principalmente en Estados Unidos, lo que implica
+    una transferencia internacional de datos. Al usar el Servicio, el negocio autoriza estas transferencias, que se
+    limitan a lo necesario para prestarlo. También podemos divulgar datos cuando lo exija una autoridad competente
+    conforme a la ley.
+  </p>
+
+  <h2>5. Cuánto tiempo los conservamos</h2>
+  <p>
+    Conservamos los datos mientras la cuenta del negocio esté activa. Si el negocio elimina su cuenta o nos lo
+    solicita, eliminamos sus datos y los de sus conversaciones en un plazo máximo de 30 días, salvo aquellos que
+    debamos conservar por obligación legal.
+  </p>
+
+  <h2>6. Seguridad</h2>
+  <p>
+    Usamos conexiones cifradas (HTTPS), contraseñas almacenadas con hash, acceso restringido a los servidores y
+    verificación de la firma de los mensajes que recibimos de Meta. Cada negocio solo puede ver la información de su
+    propia cuenta.
+  </p>
+
+  <h2>7. Tus derechos</h2>
+  <p>
+    Puedes ejercer tus derechos de acceso, rectificación, cancelación y oposición (ARCO) escribiendo a
+    <a href={`mailto:${c.email}`}>{c.email}</a>. Responderemos dentro de los plazos de la Ley N.º 29733. Si eres
+    cliente final de un negocio que usa Vently, también puedes dirigirte a ese negocio. Si consideras que no
+    atendimos tu solicitud, puedes acudir a la Autoridad Nacional de Protección de Datos Personales del Ministerio de
+    Justicia y Derechos Humanos.
+  </p>
+  <p>Para pedir la eliminación de tus datos, sigue los pasos de <a href="/eliminacion-de-datos">esta página</a>.</p>
+
+  <h2>8. Menores de edad</h2>
+  <p>El Servicio está dirigido a negocios y no está destinado a menores de 18 años.</p>
+
+  <h2>9. Cambios</h2>
+  <p>
+    Si cambiamos esta política, publicaremos la nueva versión en esta página con su fecha de actualización y, si el
+    cambio es importante, lo avisaremos a los negocios por correo electrónico.
+  </p>
+
+  <h2>10. Contacto</h2>
+  <p>
+    {c.legalName} · RUC {c.ruc} · {c.country}<br />
+    <a href={`mailto:${c.email}`}>{c.email}</a>
+  </p>
+</Legal>

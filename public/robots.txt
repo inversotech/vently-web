@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://vently.lat/sitemap-index.xml

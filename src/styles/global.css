@@ -1,0 +1,96 @@
+@import "tailwindcss";
+@import "@fontsource-variable/inter";
+
+@theme {
+  --font-sans: "Inter Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --color-canvas: oklch(0.985 0.004 150);
+  --color-surface: oklch(1 0 0);
+  --color-ink: oklch(0.2 0.02 160);
+  --color-muted: oklch(0.48 0.02 160);
+  --color-line: oklch(0.91 0.01 150);
+  --color-accent: oklch(0.62 0.17 152);
+  --color-accent-strong: oklch(0.52 0.15 152);
+  --color-accent-soft: oklch(0.95 0.04 152);
+  --color-bubble-in: oklch(0.96 0.006 150);
+  --color-bubble-out: oklch(0.93 0.06 152);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-canvas: oklch(0.17 0.012 160);
+    --color-surface: oklch(0.21 0.014 160);
+    --color-ink: oklch(0.96 0.006 150);
+    --color-muted: oklch(0.72 0.015 155);
+    --color-line: oklch(0.3 0.015 160);
+    --color-accent: oklch(0.74 0.17 152);
+    --color-accent-strong: oklch(0.8 0.15 152);
+    --color-accent-soft: oklch(0.28 0.05 152);
+    --color-bubble-in: oklch(0.27 0.012 160);
+    --color-bubble-out: oklch(0.36 0.07 152);
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-canvas text-ink font-sans antialiased;
+    font-feature-settings: "cv11", "ss01";
+  }
+  ::selection {
+    @apply bg-accent text-white;
+  }
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-accent;
+  }
+}
+
+@utility container-page {
+  @apply mx-auto w-full max-w-6xl px-4 sm:px-6;
+}
+@utility btn {
+  @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium transition-colors;
+}
+@utility btn-primary {
+  @apply btn bg-ink text-canvas hover:bg-accent-strong hover:text-white;
+}
+@utility btn-ghost {
+  @apply btn text-ink ring-1 ring-line hover:bg-surface;
+}
+@utility eyebrow {
+  @apply text-xs font-semibold uppercase tracking-[0.14em] text-accent-strong;
+}
+
+@layer components {
+  .prose-legal {
+    @apply text-[15px] leading-7 text-muted;
+  }
+  .prose-legal h2 {
+    @apply mt-12 mb-3 text-xl font-semibold tracking-tight text-ink;
+  }
+  .prose-legal h3 {
+    @apply mt-8 mb-2 font-semibold text-ink;
+  }
+  .prose-legal p,
+  .prose-legal ul {
+    @apply mb-4;
+  }
+  .prose-legal ul {
+    @apply list-disc space-y-1.5 pl-5;
+  }
+  .prose-legal a {
+    @apply text-ink underline decoration-line underline-offset-4 hover:decoration-accent;
+  }
+  .prose-legal strong {
+    @apply font-semibold text-ink;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}

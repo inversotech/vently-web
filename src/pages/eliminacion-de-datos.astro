@@ -1,0 +1,32 @@
+---
+import Legal from '../layouts/Legal.astro';
+import { site } from '../site';
+const c = site.company;
+const subject = encodeURIComponent('Solicitud de eliminación de datos');
+---
+<Legal title="Eliminación de datos" description="Cómo solicitar la eliminación de tus datos personales en Vently, ya seas un negocio usuario o cliente de un negocio.">
+  <p>
+    Puedes pedir que eliminemos tus datos en cualquier momento. El procedimiento depende de cómo usas Vently.
+  </p>
+
+  <h2>Si tienes una cuenta de negocio</h2>
+  <ul>
+    <li>Escríbenos a <a href={`mailto:${c.email}?subject=${subject}`}>{c.email}</a> desde el correo con el que te registraste, con el asunto “Solicitud de eliminación de datos”.</li>
+    <li>Eliminaremos tu cuenta, los datos de tu negocio, tu catálogo, las conversaciones y los pedidos asociados, y revocaremos los accesos a tus canales conectados.</li>
+    <li>Para desconectar Vently de tu cuenta de WhatsApp Business por tu cuenta, también puedes quitar el acceso desde la configuración de tu portfolio comercial en Meta Business Suite.</li>
+  </ul>
+
+  <h2>Si eres cliente de un negocio que usa Vently</h2>
+  <ul>
+    <li>Escríbenos a <a href={`mailto:${c.email}?subject=${subject}`}>{c.email}</a> indicando tu número de teléfono y, si lo sabes, el nombre del negocio con el que conversaste.</li>
+    <li>Para confirmar que la solicitud es tuya, podemos pedirte que nos escribas desde ese mismo número.</li>
+    <li>Eliminaremos tus mensajes y los datos de pedido asociados a tu número y se lo informaremos al negocio.</li>
+  </ul>
+
+  <h2>Plazos</h2>
+  <p>
+    Confirmamos la recepción de tu solicitud en un máximo de 5 días hábiles y completamos la eliminación en un máximo de
+    30 días. Solo conservaremos la información que la ley nos obligue a mantener.
+  </p>
+  <p>Más detalles en nuestra <a href="/privacidad">Política de privacidad</a>.</p>
+</Legal>

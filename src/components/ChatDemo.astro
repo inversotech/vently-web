@@ -1,0 +1,48 @@
+---
+const messages = [
+  { from: 'in', text: 'Hola 👋 ¿cuánto cuesta la torta de chocolate para 15 personas?', time: '10:02' },
+  { from: 'out', text: '¡Hola! La torta de chocolate para 15 personas cuesta S/ 85. ¿Para qué fecha la necesitas?', time: '10:02' },
+  { from: 'in', text: 'Para el sábado. ¿Hacen delivery a Surco?', time: '10:03' },
+  { from: 'out', text: 'Eso lo confirma el equipo de la tienda. Ya les avisé y te escriben en unos minutos 🙌', time: '10:03' },
+];
+---
+<div class="relative mx-auto w-full max-w-sm">
+  <div class="absolute -inset-8 -z-10 rounded-[3rem] bg-accent/15 blur-3xl" aria-hidden="true"></div>
+
+  <figure class="overflow-hidden rounded-[1.75rem] border border-line bg-surface shadow-[0_30px_80px_-30px_rgb(0_0_0/0.35)]">
+    <figcaption class="flex items-center gap-3 border-b border-line px-5 py-4">
+      <span class="grid size-9 place-items-center rounded-full bg-accent-soft text-sm font-semibold text-accent-strong">D</span>
+      <span class="flex-1">
+        <span class="block text-sm font-semibold">Dulce Trigo</span>
+        <span class="block text-xs text-muted">Atendido por Vently · en línea</span>
+      </span>
+      <span class="size-2 rounded-full bg-accent" aria-hidden="true"></span>
+    </figcaption>
+
+    <ol class="space-y-3 px-4 py-5 text-[13.5px] leading-snug" aria-label="Conversación de ejemplo">
+      {messages.map((m) => (
+        <li class:list={['flex', m.from === 'out' ? 'justify-end' : 'justify-start']}>
+          <p class:list={[
+            'max-w-[82%] rounded-2xl px-3.5 py-2.5',
+            m.from === 'out' ? 'rounded-br-md bg-bubble-out' : 'rounded-bl-md bg-bubble-in',
+          ]}>
+            <span class="sr-only">{m.from === 'out' ? 'Vently:' : 'Cliente:'} </span>
+            {m.text}
+            <span class="mt-1 block text-right text-[10.5px] text-muted">{m.time}</span>
+          </p>
+        </li>
+      ))}
+    </ol>
+  </figure>
+
+  <div class="absolute -right-28 top-36 hidden rounded-2xl border border-line bg-surface px-3.5 py-2.5 text-xs shadow-lg xl:block">
+    <span class="font-semibold">Precio de tu catálogo</span>
+    <span class="block text-muted">S/ 85 · sin inventar</span>
+  </div>
+  <div class="absolute -left-32 bottom-6 hidden rounded-2xl border border-line bg-surface px-3.5 py-2.5 text-xs shadow-lg xl:block">
+    <span class="flex items-center gap-1.5 font-semibold">
+      <span class="size-1.5 rounded-full bg-amber-500" aria-hidden="true"></span>Derivado a tu equipo
+    </span>
+    <span class="block text-muted">Consulta de delivery</span>
+  </div>
+</div>

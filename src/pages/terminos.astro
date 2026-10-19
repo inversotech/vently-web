@@ -1,0 +1,89 @@
+---
+import Legal from '../layouts/Legal.astro';
+import { site } from '../site';
+const c = site.company;
+---
+<Legal title="Términos y condiciones" description="Condiciones de uso de Vently, la plataforma de atención y ventas con inteligencia artificial para WhatsApp.">
+  <p>
+    Estos términos regulan el uso de Vently, un servicio de <strong>{c.legalName}</strong> (RUC {c.ruc}). Al crear
+    una cuenta o usar el Servicio, aceptas estos términos en nombre propio y del negocio que representas.
+  </p>
+
+  <h2>1. El Servicio</h2>
+  <p>
+    Vently permite a un negocio conectar sus canales de mensajería, como WhatsApp Business, para que un asistente de
+    inteligencia artificial responda a sus clientes, tome pedidos y los registre en un panel web desde el que el
+    negocio puede supervisar e intervenir en las conversaciones.
+  </p>
+
+  <h2>2. Tu cuenta</h2>
+  <ul>
+    <li>Debes ser mayor de edad y tener facultades para actuar en nombre del negocio.</li>
+    <li>Eres responsable de mantener la confidencialidad de tu contraseña y de la actividad de tu cuenta.</li>
+    <li>La información que registras debe ser veraz y estar actualizada.</li>
+  </ul>
+
+  <h2>3. Tus responsabilidades</h2>
+  <ul>
+    <li>La información de tu negocio, catálogo y precios es tuya y eres responsable de que sea correcta: el asistente responde con base en ella.</li>
+    <li>Debes cumplir las políticas de WhatsApp Business y de Meta, incluidas la Política de Comercio y la Política de Mensajería para Empresas, así como la normativa de protección al consumidor y de protección de datos aplicable.</li>
+    <li>Debes contar con la base legal necesaria para tratar los datos de tus clientes y para comunicarte con ellos.</li>
+    <li>No puedes usar el Servicio para enviar spam, vender productos prohibidos o realizar actividades ilegales o engañosas.</li>
+  </ul>
+
+  <h2>4. Inteligencia artificial</h2>
+  <p>
+    El asistente está diseñado para usar únicamente la información que cargas y para derivar a tu equipo las consultas
+    que no puede resolver. Aun así, las respuestas generadas automáticamente pueden contener errores. Te recomendamos
+    revisar las conversaciones y los pedidos en tu panel. Los pedidos y pagos que confirmes son tu decisión y tu
+    responsabilidad frente a tus clientes.
+  </p>
+
+  <h2>5. Servicios de terceros</h2>
+  <p>
+    El Servicio depende de plataformas de terceros, como WhatsApp Business Platform de Meta. La disponibilidad de esos
+    servicios, sus políticas y los costos que cobren directamente al negocio, como las tarifas por conversación de
+    WhatsApp, no dependen de Vently.
+  </p>
+
+  <h2>6. Precio</h2>
+  <p>
+    Durante el acceso anticipado, el Servicio se ofrece sin costo. Si introducimos planes de pago, los anunciaremos con
+    anticipación y no realizaremos ningún cobro sin tu aceptación previa.
+  </p>
+
+  <h2>7. Datos y privacidad</h2>
+  <p>
+    El tratamiento de datos personales se rige por nuestra <a href="/privacidad">Política de privacidad</a>. La
+    información de tu negocio y de tus conversaciones te pertenece; puedes solicitar su eliminación en cualquier
+    momento.
+  </p>
+
+  <h2>8. Disponibilidad y cambios</h2>
+  <p>
+    Trabajamos para que el Servicio esté disponible de forma continua, pero no podemos garantizar que funcione sin
+    interrupciones. Podemos modificar o mejorar funciones, y actualizar estos términos; los cambios importantes se
+    avisarán por correo electrónico.
+  </p>
+
+  <h2>9. Suspensión y baja</h2>
+  <p>
+    Puedes dejar de usar el Servicio y pedir la eliminación de tu cuenta cuando quieras. Podemos suspender una cuenta
+    que incumpla estos términos o las políticas de Meta, avisándote salvo que la gravedad del caso lo impida.
+  </p>
+
+  <h2>10. Responsabilidad</h2>
+  <p>
+    En la medida permitida por la ley, Vently no será responsable por daños indirectos, lucro cesante o pérdidas
+    derivadas de fallas de servicios de terceros o del contenido que el negocio cargue en la plataforma.
+  </p>
+
+  <h2>11. Ley aplicable</h2>
+  <p>Estos términos se rigen por las leyes de la República del Perú.</p>
+
+  <h2>12. Contacto</h2>
+  <p>
+    {c.legalName} · RUC {c.ruc} · {c.country}<br />
+    <a href={`mailto:${c.email}`}>{c.email}</a>
+  </p>
+</Legal>
