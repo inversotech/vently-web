@@ -1,6 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
-import ProductWindow from '../components/ProductWindow.astro';
+import DemoChat from '../components/DemoChat.astro';
 import Pipeline from '../components/Pipeline.astro';
 import PanelBento from '../components/PanelBento.astro';
 import { site } from '../site';
@@ -78,49 +78,80 @@ const jsonLd = [
       class="pointer-events-none absolute inset-0 -z-10 [background-image:radial-gradient(var(--color-line)_1px,transparent_1px)] [background-size:22px_22px] [mask-image:radial-gradient(ellipse_at_top,black_30%,transparent_70%)]"
       aria-hidden="true"
     ></div>
-    <div class="container-page pt-16 pb-20 sm:pt-24 lg:pt-28">
-      <div class="mx-auto max-w-4xl text-center">
+    <div class="container-page grid items-center gap-12 pt-12 pb-20 sm:pt-16 lg:grid-cols-[minmax(0,1fr)_minmax(0,28rem)] lg:gap-16 lg:pt-20 lg:pb-28">
+      <div>
         <p class="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-3 py-1 text-xs text-muted">
           <span class="size-1.5 rounded-full bg-accent" aria-hidden="true"></span>
-          Acceso anticipado · WhatsApp Business oficial
+          Para emprendedores que venden por WhatsApp
         </p>
-        <h1 class="mt-6 text-[2.6rem] leading-[1.1] font-semibold tracking-tight text-balance sm:text-6xl">
-          Tu vendedor con IA en WhatsApp.
-          <span class="block text-muted">No inventa precios. Sabe cuándo pedirte ayuda.</span>
+        <h1 class="mt-6 text-[2.5rem] leading-[1.1] font-semibold tracking-tight text-balance sm:text-6xl">
+          Vende por WhatsApp mientras atiendes tu negocio.
         </h1>
-        <p class="mx-auto mt-6 max-w-xl text-lg leading-8 text-muted">
-          Vently atiende a tus clientes al instante, responde con la información real de tu negocio y deja cada
-          orden lista en tu panel. Sin armar bots. Sin perder ventas mientras no miras el celular.
+        <p class="mt-6 max-w-xl text-lg leading-8 text-muted">
+          Vently responde en segundos a cada cliente con tus precios reales, toma el pedido y solo te llama cuando de
+          verdad te necesita.
         </p>
-        <div class="mt-9 flex flex-wrap items-center justify-center gap-3">
+        <div class="mt-8 flex flex-wrap items-center gap-3">
           <a href={site.registerUrl} class="btn-primary px-6 py-3 text-[15px]">
             Crear cuenta gratis
             <svg viewBox="0 0 20 20" class="size-4" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 10h12m-5-5 5 5-5 5" stroke-linecap="round" stroke-linejoin="round" /></svg>
           </a>
           <a href="#como-funciona" class="btn-ghost px-6 py-3 text-[15px]">Ver cómo funciona</a>
         </div>
+        <ul class="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-sm text-muted">
+          <li class="flex items-center gap-1.5"><span class="text-success-ink" aria-hidden="true">✓</span>Gratis en acceso anticipado</li>
+          <li class="flex items-center gap-1.5"><span class="text-success-ink" aria-hidden="true">✓</span>Sin programar</li>
+          <li class="flex items-center gap-1.5"><span class="text-success-ink" aria-hidden="true">✓</span>WhatsApp Business oficial</li>
+        </ul>
       </div>
-      <div class="mt-16 sm:mt-20">
-        <ProductWindow />
+      <div>
+        <p class="mb-3 text-center text-sm font-medium text-muted lg:text-start">
+          <span aria-hidden="true">👇</span> Pruébalo como si fueras tu cliente
+        </p>
+        <DemoChat />
       </div>
     </div>
   </section>
 
-  <!-- Statement -->
-  <section>
-    <div class="container-page grid gap-10 pt-8 pb-20 sm:grid-cols-3">
-      <div>
-        <p class="text-3xl font-semibold tracking-tight">24/7</p>
-        <p class="mt-2 text-sm text-muted">Responde de día, de noche y los domingos, en segundos.</p>
+  <!-- Problem -->
+  <section class="border-y border-line bg-surface">
+    <div class="container-page py-20 sm:py-24">
+      <div class="max-w-2xl">
+        <p class="eyebrow">El problema</p>
+        <h2 class="mt-3 text-3xl font-semibold tracking-tight text-balance sm:text-4xl">
+          El cliente que espera, le compra a otro.
+        </h2>
+        <p class="mt-4 text-lg leading-8 text-muted">
+          Cuando estás atendiendo, cocinando o manejando, los mensajes se acumulan. Y en ventas, cada minuto cuenta.
+        </p>
       </div>
-      <div>
-        <p class="text-3xl font-semibold tracking-tight">Solo tus precios</p>
-        <p class="mt-2 text-sm text-muted">Cotiza con los precios de tu catálogo, tal como los escribiste.</p>
-      </div>
-      <div>
-        <p class="text-3xl font-semibold tracking-tight">1 bandeja</p>
-        <p class="mt-2 text-sm text-muted">Conversaciones y órdenes en un solo lugar, para ti y tu equipo.</p>
-      </div>
+      <dl class="mt-12 grid gap-4 sm:grid-cols-3">
+        <div class="flex flex-col rounded-3xl border border-line bg-canvas p-6">
+          <dt class="mt-3 text-sm leading-6 text-muted">
+            Responder en la primera hora da casi 7 veces más probabilidades de concretar la conversación de venta que esperar una hora más.
+          </dt>
+          <dd class="order-first text-4xl font-semibold tracking-tight">7×</dd>
+          <dd class="mt-4 text-xs text-muted">
+            <a class="underline decoration-line underline-offset-4 hover:decoration-accent" href="https://scholarsarchive.byu.edu/facpub/9711" rel="noopener">Harvard Business Review, 2011</a>
+          </dd>
+        </div>
+        <div class="flex flex-col rounded-3xl border border-line bg-canvas p-6">
+          <dt class="mt-3 text-sm leading-6 text-muted">
+            consumidores en Brasil prefieren escribir por mensajes para comunicarse con un negocio.
+          </dt>
+          <dd class="order-first text-4xl font-semibold tracking-tight">8 de 10</dd>
+          <dd class="mt-4 text-xs text-muted">
+            <a class="underline decoration-line underline-offset-4 hover:decoration-accent" href="https://www.bcg.com/publications/2024/brazil-messaging-as-a-value-driver-for-brazilian-businesses" rel="noopener">Meta y BCG, 2024</a>
+          </dd>
+        </div>
+        <div class="flex flex-col rounded-3xl border border-ink bg-ink p-6 text-canvas">
+          <dt class="mt-3 text-sm leading-6 text-canvas/75">
+            Vently contesta al instante, también de noche, los domingos y cuando tienes las manos ocupadas.
+          </dt>
+          <dd class="order-first text-4xl font-semibold tracking-tight">Segundos</dd>
+          <dd class="mt-4 text-xs text-canvas/75">Con los precios de tu catálogo</dd>
+        </div>
+      </dl>
     </div>
   </section>
 

@@ -1,6 +1,10 @@
 ---
 import Chip from './Chip.astro';
 
+interface Props { animate?: boolean }
+const { animate = true } = Astro.props;
+const seq = animate ? 'seq' : '';
+
 type Stage = 'greeting' | 'collecting' | 'confirming' | 'completed' | 'human';
 const stage: Record<Stage, { label: string; tone: 'neutral' | 'info' | 'attention' | 'success' }> = {
   greeting: { label: 'Saludo', tone: 'neutral' },
@@ -76,14 +80,14 @@ const orderDelay = 3600;
             <span class="block text-[11px] text-muted">WhatsApp · atendida por la IA</span>
           </span>
           <span class="grid">
-            <Chip tone="info" class="seq-out col-start-1 row-start-1 justify-self-end" style={`--d:${orderDelay}ms`}>Recabando datos</Chip>
-            <Chip tone="success" class="seq col-start-1 row-start-1 justify-self-end" style={`--d:${orderDelay}ms`}>Completado</Chip>
+            {animate && <Chip tone="info" class="seq-out col-start-1 row-start-1 justify-self-end" style={`--d:${orderDelay}ms`}>Recabando datos</Chip>}
+            <Chip tone="success" class={`${seq} col-start-1 row-start-1 justify-self-end`} style={`--d:${orderDelay}ms`}>Completado</Chip>
           </span>
         </div>
 
         <ol class="flex-1 space-y-2.5 px-4 py-4 text-[13px] leading-snug">
           {messages.map((m) => (
-            <li class:list={['seq flex', m.from === 'out' ? 'justify-end' : 'justify-start']} style={`--d:${m.d}ms`}>
+            <li class:list={[seq, 'flex', m.from === 'out' ? 'justify-end' : 'justify-start']} style={`--d:${m.d}ms`}>
               <p class:list={[
                 'max-w-[85%] rounded-2xl px-3.5 py-2',
                 m.from === 'out' ? 'rounded-ee-md bg-bubble-out' : 'rounded-es-md bg-bubble-in',
@@ -98,7 +102,7 @@ const orderDelay = 3600;
         </ol>
 
         <!-- Order card, inline on smaller screens -->
-        <div class="seq px-4 pb-4 lg:hidden" style={`--d:${orderDelay}ms`}>
+        <div class:list={[seq, 'px-4 pb-4 lg:hidden']} style={`--d:${orderDelay}ms`}>
           <div class="rounded-xl border border-line bg-canvas p-3.5">
             <div class="flex items-center justify-between">
               <span class="text-[13px] font-semibold">Orden #128</span>
@@ -112,7 +116,7 @@ const orderDelay = 3600;
       <!-- Order panel -->
       <aside class="hidden border-s border-line bg-canvas/60 p-4 lg:block">
         <p class="text-xs font-semibold">Orden creada por la IA</p>
-        <div class="seq mt-3 rounded-xl border border-line bg-surface p-4 shadow-sm" style={`--d:${orderDelay}ms`}>
+        <div class:list={[seq, 'mt-3 rounded-xl border border-line bg-surface p-4 shadow-sm']} style={`--d:${orderDelay}ms`}>
           <div class="flex items-center justify-between">
             <span class="text-sm font-semibold">Orden #128</span>
             <Chip tone="attention">Pendiente</Chip>
@@ -126,7 +130,7 @@ const orderDelay = 3600;
           </dl>
           <span class="mt-4 block rounded-lg bg-ink px-3 py-2 text-center text-[12px] font-semibold text-canvas">Confirmar orden</span>
         </div>
-        <p class="seq mt-3 flex items-center gap-1.5 text-[11px] text-muted" style={`--d:${orderDelay + 300}ms`}>
+        <p class:list={[seq, 'mt-3 flex items-center gap-1.5 text-[11px] text-muted']} style={`--d:${orderDelay + 300}ms`}>
           <span class="size-1.5 rounded-full bg-accent" aria-hidden="true"></span>
           Precio tomado de tu catálogo
         </p>

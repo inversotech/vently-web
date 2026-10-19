@@ -1,0 +1,243 @@
+---
+/*
+ * Interactive, scripted demo: the visitor picks a business type and taps
+ * customer questions; the "AI" answers from that business's catalog,
+ * hands off what it can't answer and creates the order. No backend.
+ */
+type Reply =
+  | { kind: 'answer'; text: string }
+  | { kind: 'handoff'; text: string }
+  | { kind: 'order'; text: string; product: string; total: string };
+
+interface Business {
+  id: string;
+  label: string;
+  name: string;
+  opening: { q: string; a: string };
+  questions: { q: string; reply: Reply }[];
+}
+
+const businesses: Business[] = [
+  {
+    id: 'pasteleria',
+    label: 'Pastelería',
+    name: 'Dulce Trigo',
+    opening: {
+      q: 'Hola, ¿cuánto cuesta la torta de chocolate para 15 personas?',
+      a: '¡Hola! La torta de chocolate para 15 personas cuesta S/ 85. ¿Para qué día la necesitas?',
+    },
+    questions: [
+      {
+        q: '¿Pueden escribir un mensaje en la torta?',
+        reply: { kind: 'handoff', text: 'Buena pregunta. Eso lo confirma el equipo de la tienda; ya les avisé y te escriben en unos minutos.' },
+      },
+      {
+        q: 'Quiero pedirla para el sábado',
+        reply: { kind: 'order', text: '¡Listo! Registré tu pedido: 1 torta de chocolate (15 personas) para el sábado.', product: 'Torta de chocolate (15 personas)', total: '85.00' },
+      },
+    ],
+  },
+  {
+    id: 'ropa',
+    label: 'Ropa',
+    name: 'Moda Kiara',
+    opening: {
+      q: 'Hola, ¿cuánto está el polo oversize?',
+      a: '¡Hola! El polo oversize cuesta S/ 45 y viene en tallas S, M y L, en negro, blanco o beige. ¿Cuál te gustaría?',
+    },
+    questions: [
+      {
+        q: '¿Hacen envíos a provincia?',
+        reply: { kind: 'handoff', text: 'Eso no lo tengo en mi información, así que prefiero no adivinar. Ya avisé a la tienda y te responden en breve.' },
+      },
+      {
+        q: 'Quiero el negro en talla M',
+        reply: { kind: 'order', text: '¡Perfecto! Registré tu pedido: 1 polo oversize negro, talla M.', product: 'Polo oversize negro · M', total: '45.00' },
+      },
+    ],
+  },
+  {
+    id: 'ferreteria',
+    label: 'Ferretería',
+    name: 'Ferretería El Maestro',
+    opening: {
+      q: 'Buenas, ¿a cuánto la bolsa de cemento?',
+      a: 'Buenas. La bolsa de cemento de 42.5 kg cuesta S/ 32. ¿Cuántas bolsas necesitas?',
+    },
+    questions: [
+      {
+        q: '¿Me lo pueden llevar hoy mismo?',
+        reply: { kind: 'handoff', text: 'Los envíos del día los coordina el equipo. Ya les avisé para que te confirmen la hora.' },
+      },
+      {
+        q: 'Necesito 10 bolsas',
+        reply: { kind: 'order', text: 'Listo, registré tu pedido: 10 bolsas de cemento de 42.5 kg.', product: 'Cemento 42.5 kg × 10', total: '320.00' },
+      },
+    ],
+  },
+  {
+    id: 'servicios',
+    label: 'Servicios',
+    name: 'Técnico Express',
+    opening: {
+      q: 'Hola, ¿cuánto cuesta el mantenimiento de una laptop?',
+      a: '¡Hola! El mantenimiento preventivo de laptop cuesta S/ 60. ¿Qué día te acomoda traerla?',
+    },
+    questions: [
+      {
+        q: '¿Y cuánto por cambiar la pantalla?',
+        reply: { kind: 'handoff', text: 'El cambio de pantalla se cotiza según el modelo. Le aviso al técnico para que te pase el precio exacto.' },
+      },
+      {
+        q: 'La llevo el lunes',
+        reply: { kind: 'order', text: '¡Agendado! Registré tu mantenimiento preventivo para el lunes.', product: 'Mantenimiento preventivo de laptop', total: '60.00' },
+      },
+    ],
+  },
+];
+
+const first = businesses[0];
+---
+<div class="relative mx-auto w-full max-w-md" data-demo>
+  <div class="absolute -inset-6 -z-10 rounded-[3rem] bg-accent/15 blur-3xl" aria-hidden="true"></div>
+
+  <script type="application/json" data-demo-data set:html={JSON.stringify(businesses)} is:inline />
+
+  <div class="rounded-[1.75rem] border border-line bg-surface shadow-[0_30px_80px_-30px_rgb(0_0_0/0.35)]">
+    <div class="border-b border-line px-4 pt-4 pb-3">
+      <p class="text-xs font-medium text-muted" id="demo-pick">Elige tu tipo de negocio</p>
+      <div class="mt-2 flex flex-wrap gap-1.5" role="group" aria-labelledby="demo-pick">
+        {businesses.map((b, i) => (
+          <button
+            type="button"
+            data-business={b.id}
+            aria-pressed={i === 0 ? 'true' : 'false'}
+            class="rounded-full px-3 py-1.5 text-[13px] font-medium text-muted ring-1 ring-line transition-[color,background-color] duration-150 hover:text-ink aria-pressed:bg-ink aria-pressed:text-canvas aria-pressed:ring-ink"
+          >{b.label}</button>
+        ))}
+      </div>
+    </div>
+
+    <div class="flex items-center gap-3 border-b border-line px-4 py-3">
+      <span class="grid size-9 place-items-center rounded-full bg-accent-soft text-sm font-semibold text-success-ink" data-demo-initial aria-hidden="true">{first.name[0]}</span>
+      <span class="min-w-0 flex-1">
+        <span class="block truncate text-sm font-semibold" data-demo-name>{first.name}</span>
+        <span class="block text-xs text-muted">Atendido por Vently · en línea</span>
+      </span>
+      <span class="size-2 rounded-full bg-accent" aria-hidden="true"></span>
+    </div>
+
+    <ol class="h-[19rem] space-y-2.5 overflow-y-auto overscroll-contain px-4 py-4 text-[13.5px] leading-snug" data-demo-log aria-live="polite" aria-label="Conversación de prueba">
+      <li class="flex justify-start"><p class="max-w-[85%] rounded-2xl rounded-es-md bg-bubble-in px-3.5 py-2"><span class="sr-only">Cliente: </span>{first.opening.q}</p></li>
+      <li class="flex justify-end"><p class="max-w-[85%] rounded-2xl rounded-ee-md bg-bubble-out px-3.5 py-2"><span class="sr-only">Vently: </span>{first.opening.a}</p></li>
+    </ol>
+
+    <div class="border-t border-line px-4 pt-3 pb-4">
+      <p class="text-xs font-medium text-muted">Escribe como cliente:</p>
+      <div class="mt-2 flex flex-wrap gap-1.5" data-demo-questions>
+        {first.questions.map((q, i) => (
+          <button type="button" data-q={i} class="rounded-full bg-accent-soft px-3 py-1.5 text-start text-[13px] font-medium text-success-ink transition-[background-color] duration-150 hover:bg-success-soft">{q.q}</button>
+        ))}
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  type Reply =
+    | { kind: 'answer'; text: string }
+    | { kind: 'handoff'; text: string }
+    | { kind: 'order'; text: string; product: string; total: string };
+  type Business = { id: string; label: string; name: string; opening: { q: string; a: string }; questions: { q: string; reply: Reply }[] };
+
+  const root = document.querySelector<HTMLElement>('[data-demo]');
+  if (root) {
+    const data: Business[] = JSON.parse(root.querySelector('[data-demo-data]')!.textContent || '[]');
+    const log = root.querySelector<HTMLOListElement>('[data-demo-log]')!;
+    const questions = root.querySelector<HTMLDivElement>('[data-demo-questions]')!;
+    const nameEl = root.querySelector<HTMLElement>('[data-demo-name]')!;
+    const initialEl = root.querySelector<HTMLElement>('[data-demo-initial]')!;
+    const pickers = root.querySelectorAll<HTMLButtonElement>('[data-business]');
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let current = data[0];
+    let busy = false;
+    let orderNo = 128;
+
+    const el = (tag: string, cls: string, html?: string) => {
+      const n = document.createElement(tag);
+      n.className = cls;
+      if (html !== undefined) n.textContent = html;
+      return n;
+    };
+
+    const bubble = (from: 'in' | 'out', text: string) => {
+      const li = el('li', `flex ${from === 'in' ? 'justify-start' : 'justify-end'}${reduced ? '' : ' seq'}`);
+      const p = el('p', `max-w-[85%] rounded-2xl px-3.5 py-2 ${from === 'in' ? 'rounded-es-md bg-bubble-in' : 'rounded-ee-md bg-bubble-out'}`);
+      p.append(el('span', 'sr-only', from === 'in' ? 'Cliente: ' : 'Vently: '), document.createTextNode(text));
+      li.append(p);
+      return li;
+    };
+
+    const card = (tone: 'attention' | 'success', title: string, detail: string) => {
+      const li = el('li', `flex justify-end${reduced ? '' : ' seq'}`);
+      const box = el('div', `w-full rounded-xl px-3.5 py-2.5 ${tone === 'attention' ? 'bg-attention-soft text-attention-ink' : 'border border-line bg-canvas'}`);
+      box.append(el('p', 'text-[13px] font-semibold', title), el('p', `mt-0.5 text-[12px] ${tone === 'attention' ? '' : 'text-muted'}`, detail));
+      li.append(box);
+      return li;
+    };
+
+    const scroll = () => log.scrollTo({ top: log.scrollHeight, behavior: reduced ? 'auto' : 'smooth' });
+
+    const renderQuestions = (used: Set<number>) => {
+      questions.replaceChildren();
+      current.questions.forEach((q, i) => {
+        if (used.has(i)) return;
+        const b = el('button', 'rounded-full bg-accent-soft px-3 py-1.5 text-start text-[13px] font-medium text-success-ink transition-[background-color] duration-150 hover:bg-success-soft', q.q) as HTMLButtonElement;
+        b.type = 'button';
+        b.addEventListener('click', () => ask(i, used));
+        questions.append(b);
+      });
+      if (used.size === current.questions.length) {
+        const again = el('button', 'rounded-full px-3 py-1.5 text-[13px] font-medium text-muted ring-1 ring-line hover:text-ink', 'Reiniciar la conversación') as HTMLButtonElement;
+        again.type = 'button';
+        again.addEventListener('click', () => load(current));
+        questions.append(again);
+      }
+    };
+
+    const ask = (i: number, used: Set<number>) => {
+      if (busy) return;
+      busy = true;
+      used.add(i);
+      const { q, reply } = current.questions[i];
+      log.append(bubble('in', q));
+      renderQuestions(used);
+      const typing = el('li', 'flex justify-end');
+      typing.append(el('p', 'rounded-2xl rounded-ee-md bg-bubble-out px-3.5 py-2 text-muted', 'Escribiendo…'));
+      log.append(typing);
+      scroll();
+      window.setTimeout(() => {
+        typing.remove();
+        log.append(bubble('out', reply.text));
+        if (reply.kind === 'handoff') log.append(card('attention', 'Derivado a ti', 'Te avisamos en el panel para que respondas tú.'));
+        if (reply.kind === 'order') log.append(card('success', `Orden #${orderNo++} creada · Pendiente`, `${reply.product} · Total S/ ${reply.total}`));
+        busy = false;
+        scroll();
+      }, reduced ? 300 : 900);
+    };
+
+    const load = (b: Business) => {
+      current = b;
+      busy = false;
+      nameEl.textContent = b.name;
+      initialEl.textContent = b.name[0];
+      pickers.forEach((p) => p.setAttribute('aria-pressed', String(p.dataset.business === b.id)));
+      log.replaceChildren(bubble('in', b.opening.q), bubble('out', b.opening.a));
+      renderQuestions(new Set());
+    };
+
+    pickers.forEach((p) => p.addEventListener('click', () => load(data.find((b) => b.id === p.dataset.business)!)));
+    // Re-render the server-rendered first state so its buttons get handlers.
+    renderQuestions(new Set());
+  }
+</script>
