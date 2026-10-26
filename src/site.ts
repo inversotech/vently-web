@@ -1,7 +1,7 @@
 // Vently's own sales WhatsApp, digits only with country code (e.g. '51987654321').
 // While empty, the contact buttons fall back to email.
 const whatsapp = '51993365158';
-const contactMessage = 'Hola, quiero ver Vently para mi negocio y reservar el precio fundador.';
+const contactMessage = 'Hola, quiero ver Vently para mi negocio.';
 
 export const site = {
   name: 'Vently',
@@ -9,9 +9,9 @@ export const site = {
   appUrl: 'https://app.vently.lat',
   registerUrl: 'https://app.vently.lat/register',
   loginUrl: 'https://app.vently.lat/login',
-  tagline: 'Tus pedidos por WhatsApp, ordenados y cobrados',
+  tagline: 'Ventas y atención por WhatsApp con IA, para todo tu equipo',
   description:
-    'Vently responde a tus clientes por WhatsApp con tus precios, toma el pedido completo y te muestra qué entregar y quién te debe. Hecho para pastelerías y negocios que venden por encargo en Perú.',
+    'Vently atiende tu WhatsApp con IA: responde con tu información real, agenda citas, toma pedidos y le pasa cada chat a la persona correcta. Varios números, un solo panel, campañas y embudo. Hecho en Perú para clínicas, institutos, inmobiliarias, tiendas y negocios que venden por WhatsApp.',
   locale: 'es_PE',
   lang: 'es',
   contactUrl: whatsapp

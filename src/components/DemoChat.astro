@@ -7,7 +7,8 @@
 type Reply =
   | { kind: 'answer'; text: string }
   | { kind: 'handoff'; text: string }
-  | { kind: 'order'; text: string; product: string; total: string };
+  | { kind: 'order'; text: string; product: string; total: string }
+  | { kind: 'booking'; text: string; service: string; when: string };
 
 interface Business {
   id: string;
@@ -17,7 +18,46 @@ interface Business {
   questions: { q: string; reply: Reply }[];
 }
 
+// Fictitious businesses: one per kind of sale Vently closes (appointment, visit, order).
 const businesses: Business[] = [
+  {
+    id: 'salud',
+    label: 'Clínica',
+    name: 'Centro Médico Lumen',
+    opening: {
+      q: 'Hola, ¿cuánto cuesta la consulta con cardiología?',
+      a: '¡Hola! La consulta con cardiología cuesta S/ 150. Tenemos espacio mañana a las 10:00 o el jueves a las 16:30. ¿Cuál te acomoda?',
+    },
+    questions: [
+      {
+        q: 'Me duele el pecho, ¿qué tomo?',
+        reply: { kind: 'handoff', text: 'Si tienes dolor de pecho, acude ahora mismo a emergencia o llama al 106. No puedo indicarte medicamentos; ya le avisé al equipo para que te contacte.' },
+      },
+      {
+        q: 'Mañana a las 10:00, a nombre de Ana Ruiz',
+        reply: { kind: 'booking', text: 'Listo, Ana: tu cita con cardiología quedó para mañana a las 10:00. Te recordamos un día antes. 🙌', service: 'Consulta de cardiología', when: 'Mañana · 10:00' },
+      },
+    ],
+  },
+  {
+    id: 'inmobiliaria',
+    label: 'Inmobiliaria',
+    name: 'Residencial Los Olivos',
+    opening: {
+      q: 'Hola, ¿desde cuánto están los departamentos?',
+      a: '¡Hola! El de 2 dormitorios está desde S/ 320 000 y trabajamos con MiVivienda. ¿Quieres visitar el piloto?',
+    },
+    questions: [
+      {
+        q: '¿Me separan el 502?',
+        reply: { kind: 'handoff', text: 'La disponibilidad de cada unidad la confirma un asesor, así que no quiero adivinar. Ya le pasé tu chat a Carla, que te escribe ahora.' },
+      },
+      {
+        q: 'Quiero visitar el sábado a las 11',
+        reply: { kind: 'booking', text: '¡Perfecto! Tu visita al piloto quedó para el sábado a las 11:00. Te mandamos la ubicación por aquí.', service: 'Visita al departamento piloto', when: 'Sábado · 11:00' },
+      },
+    ],
+  },
   {
     id: 'pasteleria',
     label: 'Pastelería',
@@ -34,44 +74,6 @@ const businesses: Business[] = [
       {
         q: 'La quiero para el sábado',
         reply: { kind: 'order', text: '¡Listo! Registré tu pedido: 1 torta de chocolate (15 personas) para el sábado. Te paso los datos para el Yape.', product: 'Torta de chocolate (15 personas)', total: '85.00' },
-      },
-    ],
-  },
-  {
-    id: 'floreria',
-    label: 'Florería',
-    name: 'Flor de Lima',
-    opening: {
-      q: 'Hola, ¿cuánto está el ramo de 12 rosas rojas?',
-      a: '¡Hola! El ramo de 12 rosas rojas cuesta S/ 120 e incluye tarjeta con dedicatoria. ¿Para qué día y a qué distrito lo enviamos?',
-    },
-    questions: [
-      {
-        q: '¿Llegan hoy a Chorrillos?',
-        reply: { kind: 'handoff', text: 'Las entregas del mismo día las confirma la florería según la hora. Ya les avisé para que te respondan ahora.' },
-      },
-      {
-        q: 'Para el viernes en Miraflores',
-        reply: { kind: 'order', text: '¡Perfecto! Registré tu pedido: ramo de 12 rosas rojas para el viernes en Miraflores. ¿Qué dedicatoria va en la tarjeta?', product: 'Ramo de 12 rosas rojas', total: '120.00' },
-      },
-    ],
-  },
-  {
-    id: 'regalos',
-    label: 'Desayunos sorpresa',
-    name: 'Buenos Días Box',
-    opening: {
-      q: 'Hola, ¿cuánto cuesta el desayuno sorpresa clásico?',
-      a: '¡Hola! El desayuno clásico cuesta S/ 95: jugo, sándwich, fruta, café y un globo. ¿Para qué día lo necesitas?',
-    },
-    questions: [
-      {
-        q: '¿Pueden agregar una botella de vino?',
-        reply: { kind: 'handoff', text: 'Eso no está en el catálogo, así que prefiero no inventar un precio. Ya le avisé a la tienda para que te cotice.' },
-      },
-      {
-        q: 'Lo quiero para el domingo',
-        reply: { kind: 'order', text: '¡Listo! Registré tu pedido: 1 desayuno sorpresa clásico para el domingo. ¿A qué dirección lo llevamos?', product: 'Desayuno sorpresa clásico', total: '95.00' },
       },
     ],
   },
@@ -128,7 +130,8 @@ const first = businesses[0];
   type Reply =
     | { kind: 'answer'; text: string }
     | { kind: 'handoff'; text: string }
-    | { kind: 'order'; text: string; product: string; total: string };
+    | { kind: 'order'; text: string; product: string; total: string }
+    | { kind: 'booking'; text: string; service: string; when: string };
   type Business = { id: string; label: string; name: string; opening: { q: string; a: string }; questions: { q: string; reply: Reply }[] };
 
   const root = document.querySelector<HTMLElement>('[data-demo]');
@@ -200,7 +203,8 @@ const first = businesses[0];
       window.setTimeout(() => {
         typing.remove();
         log.append(bubble('out', reply.text));
-        if (reply.kind === 'handoff') log.append(card('attention', 'Derivado a ti', 'Te avisamos en el panel para que respondas tú.'));
+        if (reply.kind === 'handoff') log.append(card('attention', 'Derivado a una persona', 'Le llega el aviso a quien atiende este número.'));
+        if (reply.kind === 'booking') log.append(card('success', 'Cita agendada en tu agenda', `${reply.service} · ${reply.when}`));
         if (reply.kind === 'order') log.append(card('success', `Orden #${orderNo++} creada · Pendiente`, `${reply.product} · Total S/ ${reply.total}`));
         busy = false;
         scroll();

@@ -3,97 +3,113 @@ import Base from '../layouts/Base.astro';
 import DemoChat from '../components/DemoChat.astro';
 import Pipeline from '../components/Pipeline.astro';
 import PanelBento from '../components/PanelBento.astro';
+import Features from '../components/Features.astro';
 import { site } from '../site';
+
+const industries = ['Clínicas y centros médicos', 'Institutos y academias', 'Inmobiliarias', 'Tiendas con equipo', 'Pedidos por encargo'];
 
 const pains = [
   {
-    title: 'El pedido del sábado, enterrado entre audios',
-    text: 'Sabor, porciones, dirección y hora quedan repartidos en veinte mensajes. Basta uno que no leíste para fallar una entrega.',
+    title: 'El chat que nadie contestó porque cada uno pensó que lo veía otro',
+    text: 'Varios números, varias personas y ningún responsable claro. El cliente escribe dos veces y se va.',
   },
   {
-    title: 'El adelanto por Yape que nadie anotó',
-    text: '¿Ya pagó la mitad? ¿Esa captura es real? Sin un registro, cobrar el saldo depende de tu memoria.',
+    title: 'La cita o el pedido que quedó en el aire',
+    text: 'Horarios, precios y datos repartidos en veinte mensajes. Basta uno sin leer para perder la venta o la agenda.',
   },
   {
     title: 'La pregunta de las 11\u00a0p.\u00a0m. que nadie respondió',
-    text: 'Mientras horneas, decoras o duermes, el cliente pregunta el precio. Si espera mucho, le compra a otra.',
+    text: 'Fuera de horario, en hora punta o un domingo: si el cliente espera mucho, se va a otro lado.',
   },
 ];
 
 const differences = [
   {
-    alone: 'Contestas tú, entre tarea y tarea, o con respuestas automáticas que no cierran la venta.',
-    vently: 'La IA responde en segundos con tus precios reales, y lo que no sabe te lo pasa a ti.',
+    alone: 'Cada persona responde desde su celular, sin saber quién ya atendió a quién.',
+    vently: 'Una bandeja para todo el equipo: cada chat tiene un responsable y se reparte por turnos.',
   },
   {
-    alone: 'Los pedidos quedan en el chat; para ordenarlos, los copias al cuaderno.',
-    vently: 'Cada venta cerrada queda como pedido, con cliente, producto, cantidad y dirección.',
+    alone: 'Un número por línea y nadie ve el conjunto, o todo mezclado en un solo número.',
+    vently: 'Varios números especialistas en un panel. Cada persona ve solo los suyos y el dueño ve todo.',
   },
   {
-    alone: 'Para saber quién te debe, revisas capturas una por una.',
-    vently: 'Registras el adelanto y ves en soles el saldo de cada pedido. Tu cliente recibe el aviso de lo que pagó y lo que falta.',
+    alone: 'Respuestas automáticas que no cierran nada, o una IA genérica que inventa.',
+    vently: 'La IA responde con tu información, agenda en horarios libres y toma pedidos. Lo que no sabe, se lo pasa a una persona.',
   },
   {
-    alone: 'Las entregas de mañana viven en tu cabeza o en un papel.',
-    vently: 'El panel Hoy te muestra qué entregar hoy y mañana, con los detalles de cada encargo.',
+    alone: 'La agenda y los pedidos viven en una libreta o en una hoja de cálculo.',
+    vently: 'Citas y pedidos quedan registrados solos, con recordatorio, adelanto y saldo.',
   },
   {
-    alone: 'Al final del día no sabes bien cuánto vendiste.',
-    vently: 'El panel Hoy te dice cuánto vendiste y qué atendió la IA sola.',
+    alone: 'Para volver a escribirles a tus clientes, copias números uno por uno.',
+    vently: 'Campañas con plantillas aprobadas a quienes elijas por etiqueta o etapa del embudo.',
   },
 ];
 
 const steps = [
   {
-    title: 'Nos escribes y vemos tu negocio',
-    text: 'En una llamada de 30 minutos revisamos cómo recibes pedidos hoy y si Vently te sirve.',
+    title: 'Vemos tu operación',
+    text: 'En una llamada revisamos tus números, tu equipo y cómo atiendes hoy, y si Vently te sirve.',
   },
   {
-    title: 'Cargamos tu catálogo contigo',
-    text: 'Tus productos, precios y las respuestas a lo que tus clientes siempre preguntan. Pruebas el asistente como si fueras tu cliente antes de activarlo.',
+    title: 'Lo configuramos contigo',
+    text: 'Servicios, precios, horarios, respuestas típicas de tu rubro y quién atiende cada número. Pruebas el asistente como si fueras tu cliente antes de activarlo.',
   },
   {
     title: 'Vently atiende y ordena',
-    text: 'Conectamos tu WhatsApp con el registro oficial de Meta y los pedidos empiezan a llegar ordenados a tu panel.',
+    text: 'Conectamos tus números con la plataforma oficial de Meta y tu equipo empieza a trabajar desde un solo panel.',
   },
 ];
 
 const founderIncludes = [
-  'Asistente con IA que responde con tu catálogo',
+  'Asistente con IA en tu número de WhatsApp',
   'Pedidos con fecha de entrega, adelanto y saldo',
+  'Agenda de citas y recordatorios',
   'Avisos en tu celular cuando un cliente te necesita',
-  'Panel Hoy con tus ventas del día',
   'Puesta en marcha acompañada, sin costo',
+];
+
+const teamIncludes = [
+  'Varios números especialistas y equipo por número',
+  'Bandeja compartida con asignación por turnos',
+  'Embudo, contactos y etiquetas',
+  'Campañas y plantillas de WhatsApp',
+  'Flujos con botones y agenda con IA',
+  'Puesta en marcha por línea, con tu equipo',
 ];
 
 const faqs = [
   {
-    q: '¿Sirve si hago tortas personalizadas?',
-    a: 'Sí. Lo que tiene precio en tu catálogo, la IA lo vende sola. Lo que se cotiza según el diseño, no lo inventa: le dice al cliente que tú le confirmas y te pasa la conversación con el motivo.',
+    q: '¿Sirve para mi rubro?',
+    a: 'Vently es una sola plataforma para negocios que venden o atienden por WhatsApp: clínicas y centros médicos, institutos, inmobiliarias, tiendas y negocios que trabajan por encargo. Lo propio de cada rubro, como las preguntas típicas, las etapas del embudo o las reglas de la IA, viene configurado para empezar.',
   },
   {
-    q: '¿Y si no tengo una pastelería?',
-    a: 'Vently funciona para cualquier negocio que vende por WhatsApp, sobre todo los que trabajan por encargo y con fecha de entrega: florerías, desayunos sorpresa, regalos, catering.',
+    q: '¿Puedo tener varios números y que cada uno venda algo distinto?',
+    a: 'Sí. Cada número puede vender todo tu catálogo o especializarse en algunos productos o servicios. Si un cliente pregunta por algo de otra línea, la IA le pasa el número correcto.',
   },
   {
-    q: '¿Necesito saber programar o armar un chatbot?',
-    a: 'No. Describes tu negocio y cargas tu catálogo; la inteligencia artificial se encarga de conversar. En la puesta en marcha lo hacemos contigo.',
+    q: '¿Cada persona de mi equipo ve todo?',
+    a: 'No. Los dueños ven todo; cada persona del equipo ve solo las conversaciones, pedidos y citas de los números que le asignes. Los chats se pueden asignar a mano o repartir por turnos.',
   },
   {
-    q: '¿Qué pasa si un cliente pregunta algo que la IA no sabe?',
-    a: 'No inventa la respuesta. Le dice al cliente que lo atenderás tú y te avisa en el celular. Cuando le respondes, puedes enseñarle esa respuesta a la IA para la próxima vez.',
+    q: '¿La IA da diagnósticos o inventa respuestas?',
+    a: 'No. Responde solo con la información que tú cargaste y, cuando no sabe algo, se lo pasa a una persona con el motivo. En salud tiene reglas firmes: nunca diagnostica ni indica medicamentos, y ante una urgencia indica acudir a emergencia.',
+  },
+  {
+    q: '¿Puedo enviar campañas o recordatorios?',
+    a: 'Sí, con plantillas aprobadas por Meta, a quienes elijas por etiqueta o etapa del embudo, ahora o programadas. Quien responde “BAJA” deja de recibirlas. Meta cobra cada mensaje de campaña directo a tu cuenta, y Vently te muestra cuánto llevas.',
   },
   {
     q: '¿Usa la API oficial de WhatsApp?',
-    a: 'Sí. Vently funciona sobre WhatsApp Business Platform, la plataforma oficial de Meta para empresas. Conectas tu número con el registro integrado de Meta.',
+    a: 'Sí. Vently funciona sobre WhatsApp Business Platform, la plataforma oficial de Meta para empresas. Tus números se conectan con el registro integrado de Meta.',
   },
   {
     q: '¿Cuánto cuesta?',
-    a: `Los primeros ${site.founder.seats} negocios pagan S/ ${site.founder.price} al mes, para siempre, a cambio de conversar con nosotros una vez al mes sobre cómo mejorar Vently. Los mensajes que Meta cobra por WhatsApp se pagan aparte, directo a Meta, y Vently te muestra cuánto llevas en el mes.`,
+    a: `Para un negocio con un número, los primeros ${site.founder.seats} pagan S/ ${site.founder.price} al mes, para siempre. Para equipos con varios números armamos un plan según tus números y personas. En ambos casos, los mensajes que Meta cobra por WhatsApp se pagan aparte, directo a Meta, y Vently te muestra el consumo del mes.`,
   },
   {
     q: '¿Qué pasa con los datos de mis clientes?',
-    a: 'Se usan solo para atender a tus clientes en tu nombre. No los vendemos, no los compartimos con fines publicitarios y tus conversaciones no se usan para entrenar modelos de IA.',
+    a: 'Se usan solo para atender a tus clientes en tu nombre. No los vendemos, no los compartimos con fines publicitarios y tus conversaciones no se usan para entrenar modelos de IA. Puedes enviar un aviso de privacidad automático a cada persona nueva.',
   },
 ];
 
@@ -107,7 +123,7 @@ const jsonLd = [
     operatingSystem: 'Web',
     description: site.description,
     inLanguage: 'es',
-    offers: { '@type': 'Offer', price: String(site.founder.price), priceCurrency: 'PEN', description: 'Precio fundador mensual' },
+    offers: { '@type': 'Offer', price: String(site.founder.price), priceCurrency: 'PEN', description: 'Precio fundador mensual para un negocio con un número' },
     publisher: { '@type': 'Organization', name: site.company.legalName },
   },
   {
@@ -135,31 +151,34 @@ const arrow = '<svg viewBox="0 0 20 20" class="size-4" fill="none" stroke="curre
       <div>
         <p class="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-3 py-1 text-xs text-muted">
           <span class="size-1.5 rounded-full bg-accent" aria-hidden="true"></span>
-          Para pastelerías y negocios que venden por encargo
+          Para negocios que venden y atienden por WhatsApp
         </p>
         <h1 class="mt-6 text-[2.5rem] leading-[1.1] font-semibold tracking-tight text-balance sm:text-6xl">
-          Tus pedidos por WhatsApp, ordenados y cobrados.
+          Tu WhatsApp atendido con IA, y ordenado para todo tu equipo.
         </h1>
         <p class="mt-6 max-w-xl text-lg leading-8 text-muted">
-          Vently responde a tus clientes con tus precios, toma el pedido completo y te muestra qué entregar y quién te
-          debe. Tú sigues horneando.
+          Vently responde con tu información real, agenda citas, toma pedidos y le pasa cada chat a la persona correcta.
+          Varios números, un solo panel.
         </p>
         <div class="mt-8 flex flex-wrap items-center gap-3">
           <a href={site.contactUrl} class="btn-primary px-6 py-3 text-[15px]" rel="noopener">
             {site.contactLabel}
             <Fragment set:html={arrow} />
           </a>
-          <a href="#fundadores" class="btn-ghost px-6 py-3 text-[15px]">Ver precio fundador</a>
+          <a href="#funciones" class="btn-ghost px-6 py-3 text-[15px]">Ver funciones</a>
         </div>
         <ul class="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-sm text-muted">
-          <li class="flex items-center gap-1.5"><span class="text-success-ink" aria-hidden="true">✓</span>S/ {site.founder.price} al mes para los primeros {site.founder.seats}</li>
-          <li class="flex items-center gap-1.5"><span class="text-success-ink" aria-hidden="true">✓</span>Sin programar</li>
           <li class="flex items-center gap-1.5"><span class="text-success-ink" aria-hidden="true">✓</span>WhatsApp Business oficial</li>
+          <li class="flex items-center gap-1.5"><span class="text-success-ink" aria-hidden="true">✓</span>Varios números y equipo</li>
+          <li class="flex items-center gap-1.5"><span class="text-success-ink" aria-hidden="true">✓</span>Sin programar</li>
+        </ul>
+        <ul class="mt-8 flex flex-wrap gap-2" aria-label="Rubros">
+          {industries.map((r) => <li class="rounded-full border border-line bg-surface px-3 py-1 text-xs text-muted">{r}</li>)}
         </ul>
       </div>
       <div>
         <p class="mb-3 text-center text-sm font-medium text-muted lg:text-start">
-          <span aria-hidden="true">👇</span> Pruébalo como si fueras tu cliente
+          <span aria-hidden="true">👇</span> Pruébalo como si fueras el cliente
         </p>
         <DemoChat />
       </div>
@@ -172,15 +191,11 @@ const arrow = '<svg viewBox="0 0 20 20" class="size-4" fill="none" stroke="curre
       <div class="max-w-2xl">
         <p class="eyebrow">El problema</p>
         <h2 class="mt-3 text-3xl font-semibold tracking-tight text-balance sm:text-4xl">
-          Vender ya vendes. Lo difícil es no perder el hilo.
+          Los clientes ya te escriben. Lo difícil es que nadie se pierda.
         </h2>
         <p class="mt-4 text-lg leading-8 text-muted">
-          En Lima, 7 de cada 10 tortas se compran con anticipación, para una fecha. Cada una es un pedido que no se puede
-          olvidar, un adelanto que hay que cobrar y una entrega que tiene que salir a tiempo.
-        </p>
-        <p class="mt-2 text-xs text-muted">
-          Fuente:{' '}
-          <a class="underline decoration-line underline-offset-4 hover:decoration-accent" href="https://gestion.pe/economia/empresas/el-millonario-negocio-de-las-tortas-en-peru-mercado-mueve-s1400-millones-y-busca-nuevos-protagonistas-noticia/" rel="noopener">estudio de Flanqueo publicado en Gestión, 2026</a>.
+          Con varios números, varias personas y cientos de chats al día, el problema ya no es responder: es saber quién
+          atiende qué, agendar sin errores y volver a escribirle a quien ya te compró.
         </p>
       </div>
       <ul class="mt-12 grid gap-4 sm:grid-cols-3">
@@ -211,20 +226,20 @@ const arrow = '<svg viewBox="0 0 20 20" class="size-4" fill="none" stroke="curre
           Contestar ya no basta. Lo que te falta es orden.
         </h2>
         <p class="mt-4 text-lg leading-8 text-muted">
-          Responder mensajes es solo el comienzo. Vently se encarga de lo que viene después: el pedido, el cobro y la
-          cuenta del día.
+          La IA de Meta ya conversa gratis. Vently se encarga de lo que viene después: la cita, el pedido, el responsable
+          de cada chat y el seguimiento.
         </p>
       </div>
       <div class="mt-14 overflow-hidden rounded-3xl border border-line">
         <div class="hidden grid-cols-2 border-b border-line bg-surface text-sm font-semibold md:grid">
-          <p class="px-6 py-4 text-muted">Solo con WhatsApp Business</p>
+          <p class="px-6 py-4 text-muted">Solo con la app de WhatsApp</p>
           <p class="border-s border-line px-6 py-4">Con Vently</p>
         </div>
         <ul class="divide-y divide-line">
           {differences.map((d) => (
             <li class="grid md:grid-cols-2">
               <p class="flex gap-3 px-6 py-5 text-[15px] leading-7 text-muted">
-                <span class="sr-only md:hidden">Solo con WhatsApp Business: </span><span aria-hidden="true">—</span>{d.alone}
+                <span class="sr-only md:hidden">Solo con la app de WhatsApp: </span><span aria-hidden="true">—</span>{d.alone}
               </p>
               <p class="flex gap-3 bg-accent-soft/40 px-6 py-5 text-[15px] leading-7 md:border-s md:border-line">
                 <span class="sr-only md:hidden">Con Vently: </span><span class="text-success-ink" aria-hidden="true">✓</span>{d.vently}
@@ -236,43 +251,59 @@ const arrow = '<svg viewBox="0 0 20 20" class="size-4" fill="none" stroke="curre
     </div>
   </section>
 
+  <Features />
+
   <PanelBento />
 
-  <!-- Founders -->
-  <section id="fundadores" class="border-y border-line bg-surface">
-    <div class="container-page grid gap-12 py-24 sm:py-32 lg:grid-cols-[1fr_1.1fr] lg:items-center">
-      <div>
-        <p class="eyebrow">Precio fundador</p>
+  <!-- Pricing -->
+  <section id="precios" class="border-y border-line bg-surface">
+    <div class="container-page py-24 sm:py-32">
+      <div class="max-w-2xl">
+        <p class="eyebrow">Precios</p>
         <h2 class="mt-3 text-3xl font-semibold tracking-tight text-balance sm:text-4xl">
-          Solo {site.founder.seats} negocios. S/&nbsp;{site.founder.price} al mes, para siempre.
+          A precio peruano, desde un número hasta todo tu equipo.
         </h2>
         <p class="mt-4 text-lg leading-8 text-muted">
-          Buscamos a los primeros negocios que construyan Vently con nosotros. Mantienes el precio mientras sigas, y a
-          cambio conversamos una vez al mes sobre qué mejorar.
-        </p>
-        <p class="mt-4 text-sm leading-6 text-muted">
-          Meta está terminando de aprobar la conexión de números de otros negocios. Mientras tanto preparamos tu
-          asistente con tu catálogo y lo pruebas; tu primer cobro llega cuando tu WhatsApp esté conectado.
+          Los mensajes que Meta cobra por WhatsApp se pagan aparte, directo a Meta, y Vently te muestra el consumo de cada mes.
         </p>
       </div>
-      <div class="rounded-3xl border border-ink bg-ink p-8 text-canvas sm:p-10">
-        <p class="flex items-baseline gap-2">
-          <span class="text-5xl font-semibold tracking-tight tabular-nums">S/&nbsp;{site.founder.price}</span>
-          <span class="text-canvas/70">al mes</span>
-        </p>
-        <p class="mt-2 text-sm text-canvas/70">Precio fundador · primeros {site.founder.seats} negocios</p>
-        <ul class="mt-8 space-y-3 text-[15px]">
-          {founderIncludes.map((item) => (
-            <li class="flex gap-3"><span class="text-accent-on-ink" aria-hidden="true">✓</span>{item}</li>
-          ))}
-        </ul>
-        <a href={site.contactUrl} class="btn mt-10 w-full justify-center bg-canvas px-6 py-3 text-[15px] text-ink hover:bg-accent-strong hover:text-on-accent" rel="noopener">
-          Reservar mi cupo
-        </a>
-        <p class="mt-4 text-xs leading-5 text-canvas/60">
-          Los mensajes que Meta cobra por WhatsApp se pagan aparte, directo a Meta. Vently te muestra cuánto llevas en el mes.
-        </p>
+      <div class="mt-14 grid gap-4 lg:grid-cols-2">
+        <div id="fundadores" class="flex flex-col rounded-3xl border border-line bg-canvas p-8 sm:p-10">
+          <p class="text-sm font-semibold">Un negocio, un número</p>
+          <p class="mt-4 flex items-baseline gap-2">
+            <span class="text-5xl font-semibold tracking-tight tabular-nums">S/&nbsp;{site.founder.price}</span>
+            <span class="text-muted">al mes</span>
+          </p>
+          <p class="mt-2 text-sm text-muted">Precio fundador para los primeros {site.founder.seats}, para siempre, a cambio de una conversación al mes sobre qué mejorar.</p>
+          <ul class="mt-8 space-y-3 text-[15px]">
+            {founderIncludes.map((item) => (
+              <li class="flex gap-3"><span class="text-success-ink" aria-hidden="true">✓</span>{item}</li>
+            ))}
+          </ul>
+          <div class="mt-auto pt-10">
+            <a href={site.contactUrl} class="btn-ghost w-full justify-center px-6 py-3 text-[15px]" rel="noopener">Reservar mi cupo</a>
+          </div>
+        </div>
+        <div class="flex flex-col rounded-3xl border border-ink bg-ink p-8 text-canvas sm:p-10">
+          <p class="text-sm font-semibold">Equipos con varios números</p>
+          <p class="mt-4 flex items-baseline gap-2">
+            <span class="text-5xl font-semibold tracking-tight">A tu medida</span>
+          </p>
+          <p class="mt-2 text-sm text-canvas/70">Según tus números y tu equipo. Te lo cotizamos después de ver tu operación.</p>
+          <ul class="mt-8 space-y-3 text-[15px]">
+            {teamIncludes.map((item) => (
+              <li class="flex gap-3"><span class="text-accent-on-ink" aria-hidden="true">✓</span>{item}</li>
+            ))}
+          </ul>
+          <div class="mt-auto pt-10">
+            <a href={site.contactUrl} class="btn w-full justify-center bg-canvas px-6 py-3 text-[15px] text-ink hover:bg-accent-strong hover:text-on-accent" rel="noopener">Agenda una demo</a>
+          </div>
+        </div>
       </div>
+      <p class="mt-6 text-sm leading-6 text-muted">
+        Meta está terminando de aprobar la conexión de números de otros negocios. Mientras tanto configuramos tu asistente
+        y lo pruebas; el primer cobro llega cuando tus números estén conectados.
+      </p>
     </div>
   </section>
 
@@ -282,7 +313,7 @@ const arrow = '<svg viewBox="0 0 20 20" class="size-4" fill="none" stroke="curre
       <div class="max-w-2xl">
         <p class="eyebrow">Para empezar</p>
         <h2 class="mt-3 text-3xl font-semibold tracking-tight text-balance sm:text-4xl">
-          Te acompañamos desde el primer pedido.
+          Te acompañamos hasta que tu equipo trabaje solo.
         </h2>
       </div>
       <ol class="mt-14 grid gap-px overflow-hidden rounded-3xl border border-line bg-line md:grid-cols-3">
@@ -330,10 +361,10 @@ const arrow = '<svg viewBox="0 0 20 20" class="size-4" fill="none" stroke="curre
     <div class="relative overflow-hidden rounded-[2rem] bg-ink px-6 py-16 text-center text-canvas sm:px-16 sm:py-20">
       <div class="absolute -top-24 left-1/2 -z-0 size-96 -translate-x-1/2 rounded-full bg-accent/30 blur-3xl" aria-hidden="true"></div>
       <h2 class="relative text-3xl font-semibold tracking-tight text-balance sm:text-4xl">
-        Que el próximo pedido llegue ordenado.
+        Que ningún cliente se quede sin respuesta.
       </h2>
       <p class="relative mx-auto mt-4 max-w-lg text-canvas/70">
-        Quedan cupos con precio fundador. Escríbenos y vemos juntos si Vently le sirve a tu negocio.
+        Escríbenos y vemos juntos tus números, tu equipo y si Vently le sirve a tu negocio.
       </p>
       <a href={site.contactUrl} class="btn relative mt-8 bg-canvas px-6 py-3 text-[15px] text-ink hover:bg-accent-strong hover:text-on-accent" rel="noopener">
         {site.contactLabel}
